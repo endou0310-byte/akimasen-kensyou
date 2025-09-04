@@ -1,0 +1,2566 @@
+/* =========================================
+   FreeFree.jp/lp-2 風 LP スタイル
+   対象HTML: index18.html（クラス名: lp-*, band, btn など）
+   フォントは HTML 側で読み込み済み（Noto Sans JP / Rounded M+）
+   ========================================= */
+
+/* --------------------
+   CSS Variables & Base
+-------------------- */
+:root{
+  --ink:#0E162A;
+  --muted:#67809B;
+  --bg:#F4F8FF;
+  --panel:#FFFFFF;
+  --line:#E7EEF7;
+  --acc:#1C7FCA;
+  --acc-2:#6A60E6;
+  --linegreen:#06C755;
+  --accent-soft:#EAF2FF;
+  --shadow:0 10px 22px rgba(15,23,42,.06), 0 2px 6px rgba(15,23,42,.04);
+  --radius:16px;
+}
+
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+html,body{margin:0;padding:0}
+body{
+  background:var(--bg);
+  color:var(--ink);
+  font-family:"Rounded Mplus 1c","Noto Sans JP",system-ui,-apple-system,Segoe UI,Roboto,Ubuntu,"Hiragino Kaku Gothic ProN","Yu Gothic UI","Yu Gothic",Meiryo,sans-serif;
+  line-height:1.7;
+  letter-spacing:.02em;
+  -webkit-font-smoothing:antialiased;
+}
+img{max-width:100%;height:auto;vertical-align:middle}
+a{color:inherit;text-decoration:none}
+
+/* --------------------
+   Layout Helpers
+-------------------- */
+.lp-container,.container{max-width:1100px;margin:0 auto;padding:0 20px}
+.lp-band,.band{padding:72px 0}
+.lp-center{text-align:center}
+.lp-mb20{margin-bottom:20px}
+.lp-gap-lg{gap:28px}
+
+/* Grid */
+.lp-grid-2{display:grid;grid-template-columns:1fr 1fr;gap:24px}
+.lp-grid-3{display:grid;grid-template-columns:repeat(3,1fr);gap:24px}
+
+/* Card */
+.lp-card{background:var(--panel);border:1px solid var(--line);border-radius:var(--radius);box-shadow:var(--shadow);padding:22px}
+
+/* Title */
+.lp-title{font-size:clamp(22px,3.2vw,34px);line-height:1.3;margin:0 0 22px;letter-spacing:.02em}
+.lp-h3{font-size:clamp(18px,2.2vw,20px);margin:0 0 10px}
+.lp-lead{font-weight:700}
+
+/* --------------------
+   Buttons
+-------------------- */
+.lp-btn,.btn{
+  display:inline-flex;align-items:center;justify-content:center;
+  gap:10px;padding:12px 18px;border-radius:999px;
+  font-weight:800;letter-spacing:.02em;border:1px solid transparent;
+  transition:transform .05s ease, box-shadow .2s ease, background .2s ease, border-color .2s ease;
+  box-shadow:var(--shadow);
+}
+.lp-btn:hover,.btn:hover{transform:translateY(-1px)}
+.lp-btn:active,.btn:active{transform:translateY(0)}
+
+.lp-btn-lg{padding:14px 24px;font-size:16px}
+.lp-btn.primary,.btn.primary{background:linear-gradient(135deg,var(--acc),var(--acc-2));color:#fff}
+.lp-btn.primary:hover,.btn.primary:hover{filter:brightness(1.05)}
+
+/* LINE Button */
+.lp-btn-line,.btn.line{background:#fff;color:#111;border-color:var(--linegreen)}
+.lp-btn-line::before,.btn.line::before{content:"";width:18px;height:18px;display:inline-block;background:conic-gradient(from 0deg,#00c300,#00c300);border-radius:3px}
+.lp-btn-line,.btn.line{box-shadow:0 6px 14px rgba(0,195,0,.13),0 2px 4px rgba(0,0,0,.04)}
+.lp-btn-line:hover,.btn.line:hover{background:#f9fff9}
+
+/* Icon in button (paw/cat) */
+.lp-btn-ic{display:inline-flex;align-items:center;justify-content:center;width:1.1em;height:1.1em}
+.has-paw .lp-btn-ic::before{content:"🐾";font-size:1.05em}
+.has-cat .lp-btn-ic::before{content:"🐱";font-size:1.05em}
+
+/* --------------------
+   HERO
+-------------------- */
+.lp-hero{
+  color:#fff;
+  background:
+    radial-gradient(1000px 400px at 18% -22%, rgba(255,255,255,.22), rgba(255,255,255,0) 60%),
+    linear-gradient(118deg, var(--acc) 0%, #4A78E6 52%, var(--acc-2) 100%);
+}
+.lp-hero::after{
+  /* デコレーションの薄い円 */
+  content:"";position:absolute;inset:auto -12% -35% -12%;height:55%;
+  background:radial-gradient(50% 50% at 50% 50%, rgba(255,255,255,.10), transparent 60%);
+  pointer-events:none
+}
+.lp-hero-inner{display:grid;grid-template-columns:1.1fr .9fr;gap:36px;align-items:center}
+.lp-hero-title{font-size:clamp(28px,4.5vw,44px);line-height:1.25;margin:0 0 10px}
+.lp-hero-lead{font-size:clamp(15px,2vw,18px);opacity:.95;margin:0 0 18px}
+.lp-hero-img img{border-radius:18px;box-shadow:0 30px 60px rgba(0,0,0,.25)}
+
+/* Hero に猫バッジを付けたい場合（HTML 追記: <span class="lp-cat-badge">🐱</span>） */
+.lp-hero-img{position:relative}
+.lp-cat-badge{position:absolute;top:-12px;left:-12px;background:#fff;border:1px solid var(--line);border-radius:999px;padding:8px;box-shadow:var(--shadow);font-size:22px}
+
+/* --------------------
+   Awareness（認知セクション）
+-------------------- */
+.lp-awareness{background:linear-gradient(180deg,#f8fbff,#f2f7ff)}
+.lp-underline{background:linear-gradient(transparent 60%, #fff176 0)}
+
+/* Bar Chart 風 */
+.lp-bars{display:grid;gap:10px}
+.lp-bar-row{display:grid;grid-template-columns:auto 1fr auto;gap:10px;align-items:center}
+.lp-bar-label{font-weight:700;white-space:nowrap}
+.lp-bar-wrap{width:100%;height:12px;background:#edf2fb;border-radius:999px;overflow:hidden;border:1px solid #dfe9ff}
+.lp-bar{height:100%;background:linear-gradient(90deg,var(--acc),var(--acc-2));border-radius:999px}
+.lp-bar.-full{width:100%}
+.lp-bar.-tiny{width:5%}
+.lp-bar-num{font-variant-numeric:tabular-nums}
+.lp-note{color:#6b7280;font-size:13px;margin:.5rem 0 0}
+
+/* 受給対象か確認 CTA */
+.lp-eligibility .lp-cta-panel{border:1px solid var(--line);border-radius:calc(var(--radius) + 2px);padding:24px;background:#fff;box-shadow:var(--shadow)}
+.lp-cta-h{margin:0 0 8px;font-size:clamp(18px,2.2vw,22px)}
+.lp-cta-p{margin:0 0 14px;color:var(--muted)}
+.lp-cta-note{font-size:12px;color:var(--muted)}
+
+/* --------------------
+   Problems（お悩み）
+-------------------- */
+.band--white{background:#fff}
+.section-title{font-size:clamp(22px,3vw,30px);margin:0 0 18px}
+.problems-grid{list-style:none;display:grid;grid-template-columns:repeat(4,1fr);gap:16px;margin:0;padding:0}
+.problem-item{display:flex;gap:10px;align-items:flex-start;background:#fff;border:1px solid var(--line);border-radius:14px;padding:14px;box-shadow:var(--shadow)}
+.p-ic{font-size:22px;line-height:1}
+.p-txt strong{font-weight:900}
+
+.sup-cta{display:flex;gap:10px;flex-wrap:wrap}
+
+/* --------------------
+   Flow（ご利用の流れ）
+-------------------- */
+.steps-grid{list-style:none;display:grid;grid-template-columns:repeat(4,1fr);gap:18px;margin:0;padding:0}
+.step-card{position:relative;background:#fff;border:1px solid var(--line);border-radius:16px;box-shadow:var(--shadow);padding:18px}
+.step-num{position:absolute;top:-12px;left:-12px;width:32px;height:32px;border-radius:999px;background:linear-gradient(135deg,var(--acc),var(--acc-2));color:#fff;display:grid;place-items:center;font-weight:900;box-shadow:var(--shadow)}
+.step-title{margin:10px 0 6px;font-size:18px}
+.step-desc{margin:0;color:var(--muted)}
+.step-cta{margin-top:10px}
+
+/* 足跡の遊び（任意）：.step-card に .paw を付与で角に足跡背景 */
+.step-card.paw{background-image:repeating-linear-gradient(45deg, transparent 0 18px, rgba(108,92,231,.06) 18px 20px)}
+
+/* --------------------
+   Features / Callout
+-------------------- */
+.lp-features{background:#fff}
+.lp-callout{background:linear-gradient(180deg,#f7fbff,#eef6ff);border:1px solid var(--line);border-radius:18px;padding:18px;box-shadow:var(--shadow);margin:0 0 18px}
+.lp-callout-text{margin:0;text-align:center}
+.lp-strong{font-weight:900}
+.lp-super{font-size:1.25em;font-weight:900;color:#2b6fe8}
+
+/* --------------------
+   Voices v2（実績/声）
+-------------------- */
+.lp-voices-v2{background:linear-gradient(180deg,#f7fbff 0,#ffffff 60%)}
+.lp-voice-list{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}
+.lp-voice-case{background:#fff;border:1px solid var(--line);border-radius:16px;box-shadow:var(--shadow);padding:16px}
+.lp-voice-head{display:flex;flex-direction:column;gap:8px}
+.lp-voice-name{font-size:16px;margin:0}
+.lp-voice-metrics{display:flex;flex-wrap:wrap;gap:8px;list-style:none;margin:0;padding:0}
+.lp-voice-metrics li{display:flex;align-items:baseline;gap:6px;background:#f4f7ff;border:1px solid #e6ecff;border-radius:999px;padding:6px 10px;font-variant-numeric:tabular-nums}
+.lp-voice-text{margin:8px 0 0;color:#334155}
+
+/* --------------------
+   Symptoms（一例の事情）
+-------------------- */
+.lp-onecol{display:grid;gap:16px}
+.lp-list{margin:10px 0 0 1em;padding:0}
+.lp-list li{margin:.3em 0}
+.lp-stat{display:grid;place-items:center}
+.lp-stat-num{font-size:38px;line-height:1;font-weight:900;letter-spacing:.02em}
+.lp-stat-num span{font-size:1.4em}
+.lp-stat-cap{margin:4px 0 0;color:var(--muted);text-align:center}
+
+/* --------------------
+   FAQ
+-------------------- */
+.lp-faq-list{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+.lp-faq-item{background:#fff;border:1px solid var(--line);border-radius:14px;padding:14px 16px;box-shadow:var(--shadow)}
+.lp-faq-q{margin:0 0 6px;font-size:16px}
+.lp-q{display:inline-flex;align-items:center;justify-content:center;min-width:1.6em;height:1.6em;border-radius:999px;background:linear-gradient(135deg,var(--acc),var(--acc-2));color:#fff;font-weight:900;margin-right:8px}
+.lp-faq-a{margin:0;color:var(--muted)}
+
+/* Q のアイコンを猫に（任意） */
+.cat-qa .lp-q::after{content:" 🐱"}
+
+/* --------------------
+   Last CTA
+-------------------- */
+.lp-last{background:linear-gradient(180deg,#f2f7ff,#eef4ff)}
+
+/* --------------------
+   Shared (non-lp) 元HTML互換
+-------------------- */
+.container{max-width:1100px;margin:0 auto;padding:0 20px}
+.btn{background:#fff;border:1px solid var(--line);font-weight:800}
+.btn:hover{background:#f8fbff}
+
+/* --------------------
+   Cat/Paw Icon Utilities（HTML 追記前提）
+-------------------- */
+.ic-cat,.ic-paw{display:inline-flex;align-items:center;justify-content:center;width:1.2em;height:1.2em}
+.ic-cat::before{content:"🐱"}
+.ic-paw::before{content:"🐾"}
+
+/* 例: ボタンに足跡を添える
+   <a class="lp-btn lp-btn-line lp-btn-lg has-paw" ...>
+     <span class="lp-btn-ic"></span>LINEで無料相談
+   </a>
+*/
+
+/* --------------------
+   Accessibility
+-------------------- */
+:focus-visible{outline:3px solid #93c5fd;outline-offset:2px;border-radius:8px}
+
+/* --------------------
+   Responsive
+-------------------- */
+@media (max-width: 1080px){
+  .lp-hero-inner{grid-template-columns:1fr;gap:18px}
+  .lp-hero-img{order:2}
+}
+@media (max-width: 920px){
+  .lp-grid-3{grid-template-columns:1fr 1fr}
+  .steps-grid{grid-template-columns:1fr 1fr}
+  .lp-voice-list{grid-template-columns:1fr 1fr}
+  .lp-faq-list{grid-template-columns:1fr}
+}
+@media (max-width: 620px){
+  .lp-band,.band{padding:50px 0}
+  .lp-grid-2{grid-template-columns:1fr}
+  .lp-grid-3{grid-template-columns:1fr}
+  .problems-grid{grid-template-columns:1fr 1fr}
+  .steps-grid{grid-template-columns:1fr}
+  .lp-voice-list{grid-template-columns:1fr}
+  .lp-title{letter-spacing:.01em}
+}
+
+
+/* =========================================
+   Voices with Cat Avatars (ご利用者様の声・猫アイコン対応)
+   使い方：.lp-voice-head に is-avatar を追加し、先頭に <span class="cat-avatar"><img src="..." alt="..."></span>
+   ========================================= */
+.lp-voice-head.is-avatar{display:grid;grid-template-columns:auto 1fr;gap:12px;align-items:center}
+.cat-avatar{width:64px;height:64px;border-radius:999px;display:inline-grid;place-items:center;background:#fff;border:2px solid #dbeafe;box-shadow:0 6px 16px rgba(15,23,42,.08);padding:6px}
+.cat-avatar img{width:100%;height:100%;object-fit:contain;border-radius:50%}
+.cat-avatar.-sm{width:48px;height:48px;padding:4px}
+
+
+/* =========================================
+   Auto-assign Cat Avatars (2枚ずつローテ) 
+   目的：ご利用者様の声 6件で 01×2 / 02×2 / 03×2 を自動付与
+   使い方：各カード内の .lp-voice-head に is-avatar クラスを付けるだけ（画像タグ不要）
+   画像配置：/img/cat-01.png, /img/cat-02.png, /img/cat-03.png
+   備考：手動の <span class="cat-avatar"> を併用すると二重表示になるので自動割当では使わない想定
+   ========================================= */
+/* ベースのアバター擬似要素＆2カラムレイアウト（左：64pxのアイコン、右：テキスト） */
+.lp-voice-head.is-avatar{
+  display:grid;
+  grid-template-columns:64px 1fr; /* ← 固定幅を指定して右側を十分に確保 */
+  column-gap:12px;row-gap:6px;align-items:center
+}
+.lp-voice-head.is-avatar::before{
+  content:"";width:64px;height:64px;border-radius:999px;display:inline-block;
+  background:#fff center/contain no-repeat;border:2px solid #dbeafe;box-shadow:0 6px 16px rgba(15,23,42,.08);
+  grid-column:1;grid-row:1 / span 2; /* ← アバターは左列で上下2行分を占有 */
+}
+/* 右列に見出し＆メトリクスを揃える */
+.lp-voice-head.is-avatar .lp-voice-name,
+.lp-voice-head.is-avatar h3,
+.lp-voice-head.is-avatar .lp-voice-metrics{grid-column:2}
+
+/* 2枚ずつ：01 → 02 → 03 を繰り返し */
+.lp-voice-list .lp-voice-case:nth-child(6n+1) .lp-voice-head.is-avatar::before,
+.lp-voice-list .lp-voice-case:nth-child(6n+2) .lp-voice-head.is-avatar::before{background-image:url("img/cat-01.png")}
+.lp-voice-list .lp-voice-case:nth-child(6n+3) .lp-voice-head.is-avatar::before,
+.lp-voice-list .lp-voice-case:nth-child(6n+4) .lp-voice-head.is-avatar::before{background-image:url("img/cat-02.png")}
+.lp-voice-list .lp-voice-case:nth-child(6n+5) .lp-voice-head.is-avatar::before,
+.lp-voice-list .lp-voice-case:nth-child(6n+6) .lp-voice-head.is-avatar::before{background-image:url("img/cat-03.png")}
+
+@media (max-width:620px){
+  .lp-voice-head.is-avatar{grid-template-columns:56px 1fr}
+  .lp-voice-head.is-avatar::before{width:56px;height:56px}
+}
+
+
+
+/* コンパクト要約 */
+.rule-summary{
+  list-style:none; padding:0; margin:12px 0 0;
+  display:grid; gap:10px;
+}
+.rule-summary li{
+  background:#fff; border:1px solid var(--line,#e8edf3);
+  border-radius:12px; padding:10px 12px;
+}
+.lp-uline{ text-decoration: underline; text-underline-offset: 3px; }
+
+/* 1問診断ボックス */
+.quick-one{ background:#fff; border:1px solid var(--line,#e8edf3); border-radius:12px; padding:14px; }
+.quick-one-q{ display:flex; align-items:center; gap:8px; font-weight:700; }
+
+/* アコーディオン */
+.lp-accordion > summary{ cursor:pointer; font-weight:700; }
+.lp-accordion > summary::-webkit-details-marker{ display:none; }
+.lp-accordion > summary::after{ content:"＋"; float:right; font-weight:900; }
+.lp-accordion[open] > summary::after{ content:"－"; }
+
+/* ボタン（LINE） */
+.lp-btn{ display:inline-block; border-radius:999px; font-weight:700; }
+.lp-btn-line{ background:#06C755; color:#fff; padding:10px 16px; box-shadow:0 6px 18px rgba(6,199,85,.25); }
+.lp-btn-xl{ font-size:18px; padding:14px 22px; }
+.lp-btn-sm{ font-size:13px; padding:8px 12px; }
+
+/* 補助ユーティリティ */
+.lp-center{text-align:center;}
+.lp-text-muted{color:#666;}
+.lp-py20{padding:20px;}
+.lp-p12{padding:12px;}
+.lp-mt8{margin-top:8px;}
+.lp-mt12{margin-top:12px;}
+.lp-mt16{margin-top:16px;}
+.lp-mb8{margin-bottom:8px;}
+.lp-mb12{margin-bottom:12px;}
+.lp-mb24{margin-bottom:24px;}
+
+/* 下部固定CTA（スマホ） */
+.lp-sticky-cta{
+  position:fixed; left:0; right:0; bottom:12px; z-index:999;
+  display:none; justify-content:center;
+}
+.lp-sticky-cta a{
+  background:#06C755; color:#fff; font-weight:800;
+  padding:14px 22px; border-radius:999px; box-shadow:0 8px 24px rgba(6,199,85,.35);
+}
+@media (max-width:768px){
+  .rule-summary{ grid-template-columns:1fr; }
+  .lp-sticky-cta{ display:flex; }
+}
+@media (min-width:769px){
+  .rule-summary{ grid-template-columns:repeat(3,1fr); }
+}
+
+
+
+.lp-highlight{
+  background:#fff9e6;
+  border:2px solid #facc15;
+  border-radius:12px;
+  padding:14px 18px;
+  font-size:15px;
+  line-height:1.6;
+  text-align:center;
+  box-shadow:0 4px 12px rgba(0,0,0,0.05);
+}
+.lp-highlight strong{
+  color:#b45309; /* 強調は落ち着いたオレンジ */
+}
+
+
+/* サブ見出しの統一（.lp-title より一段小さめ） */
+.lp-h2{
+  font-size:clamp(20px,2.6vw,28px);
+  line-height:1.4;
+  margin:0 0 10px;
+  font-weight:900;
+}
+
+/* ③文言のハイライト（既存カード調に合わせる） */
+.lp-highlight{
+  background:var(--panel);
+  border:1px solid var(--line);
+  border-radius:var(--radius);
+  box-shadow:var(--shadow);
+  padding:14px 16px;
+  text-align:center;
+}
+.lp-highlight-txt{ 
+  margin:0; 
+  color:var(--ink);
+}
+.lp-highlight strong{ font-weight:900; }
+
+
+
+/* =========================================
+   Warm Background Theme Override (FreeFree雰囲気寄せ)
+   使い方: 既存の style.css の末尾にコピペ
+   目的: 背景色彩を「青系」→「ベージュ／オレンジ系」へ
+   ========================================= */
+
+/* 1) 全体のベース色（紙のようなアイボリー） */
+:root{
+  --bg:#FFFDF9;        /* ページ地色 */
+  /* インクはほんの少しだけ茶寄りの濃色に（本文） */
+  --ink:#3B2E22;
+  --muted:#7A6E63;     /* 補足文の落ち着いたブラウン寄りグレー */
+  /* アクセントやLINEグリーンはそのままでもOK（ブランド踏襲） */
+  /* --acc, --acc-2, --linegreen は既存値を尊重 */
+}
+
+/* body 背景を暖色へ */
+body{ background: var(--bg); color: var(--ink); }
+
+/* 2) HERO（トップ）を“淡いオレンジ→白”の柔らかいグラデに */
+.lp-hero{
+  position:relative;    /* 擬似要素の基準 */
+  overflow:hidden;      /* はみ出し防止 */
+  color:#4A3728;        /* 見出し/本文は茶系で可読性UP */
+  background:
+    radial-gradient(1000px 420px at 22% -24%, rgba(255,255,255,.25), rgba(255,255,255,0) 60%),
+    linear-gradient(180deg, #FFF7EC 0%, #FFFFFF 100%);
+}
+
+/* 3) セクションの“空気感”を暖色で統一（交互の薄いグラデ） */
+.lp-awareness{ background: linear-gradient(180deg, #FFFDF9 0%, #FFFFFF 100%); }
+.lp-features{  background:#FFFFFF; } /* 特徴は白でコントラスト */
+.lp-voices-v2{ background: linear-gradient(180deg, #FFF8F1 0%, #FFFFFF 70%); }
+.lp-last{      background: linear-gradient(180deg, #FFF6EB 0%, #FFFFFF 100%); }
+
+/* 4) 補助UIの暖色化（任意。柔らかい印象のまま強調） */
+.lp-callout{   background: linear-gradient(180deg, #FFF9F0, #FFFFFF); }
+.lp-underline{ background: linear-gradient(transparent 60%, #FFE1A8 0); } /* 見出しの下線ハイライト */
+
+/* 5) 小さな可読性調整（任意） */
+.lp-hero-title{ text-shadow: 0 1px 1px rgba(255,255,255,.3); } /* ほんのり浮かせる */
+.lp-note, .lp-faq-a, .step-desc{ color: var(--muted); }       /* 補足文は落ち着いた色で */
+
+
+/* 横長バナーとして自然に見せる */
+.hero-cats{
+  position:relative;
+  margin:0 auto;
+  max-width:1200px;           /* サイト全体の幅に合わせる */
+  border-bottom:12px solid #F0E7D9; /* 猫が寄りかかる“縁”の表現 */
+  overflow:hidden;
+}
+.hero-cats img{
+  width:100%;
+  height:auto;
+  display:block;
+  aspect-ratio: 3 / 1;        /* 1200x400相当の横長感をキープ */
+  object-fit:cover;
+  object-position:center bottom;  /* 下端を優先 → 猫の寄りかかりを強調 */
+}
+
+/* 画面幅が広い時はさらに横長に */
+@media (min-width:1200px){
+  .hero-cats img{ aspect-ratio: 21 / 7; }
+}
+
+.hero-cats + *{ margin-top: 12px; }
+
+
+
+/* Hero Section */
+.hero {
+  position: relative;
+  width: 100%;
+  height: 100vh; /* ブラウザ全体の高さ */
+  background: url("nekkoshero.svg") no-repeat center center;
+  background-size: cover; /* 背景を拡大して画面いっぱいに */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.hero-overlay {
+  width: 100%;
+  height: 100%;
+  background: rgba(255,255,255,0.65); /* 半透明の白で読みやすく */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  padding: 20px;
+}
+
+.hero-content {
+  max-width: 900px;
+  color: #2a1a0a;
+  position: relative;
+  z-index: 2;
+}
+
+.hero h1 {
+  font-size: 3rem;
+  font-weight: bold;
+  margin-bottom: 1.5rem;
+  line-height: 1.4;
+}
+
+.hero p {
+  font-size: 1.3rem;
+  margin-bottom: 2rem;
+}
+
+.btn-line {
+  display: inline-block;
+  background: #00c300;
+  color: #fff;
+  font-weight: bold;
+  padding: 16px 32px;
+  border-radius: 6px;
+  text-decoration: none;
+  font-size: 1.2rem;
+  box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+  transition: background 0.3s ease;
+}
+
+.btn-line:hover {
+  background: #009900;
+}
+
+
+/* Hero */
+.hero{
+  position:relative;
+  width:100%;
+  height:100vh;                 /* 画面一杯 */
+  display:flex; align-items:center; justify-content:center;
+  background-repeat:no-repeat;
+  background-position:center bottom; /* 下寄せ */
+  background-size:cover;
+}
+
+/* 画像パスはCSSの場所基準。img/配下ならコレ */
+.hero--cats{
+  background-image:url("img/nekkoshero.svg");
+}
+
+.hero-overlay{
+  width:100%; height:100%;
+  background:rgba(255,255,255,.35);  /* 0.35に薄める */
+  display:flex; align-items:center; justify-content:center;
+  text-align:center; padding:20px;
+}
+
+.hero-content{ max-width:900px; color:#2a1a0a }
+.hero h1{ font-size:3rem; font-weight:800; line-height:1.35; margin:0 0 1.2rem }
+.hero p{ font-size:1.2rem; margin:0 0 2rem }
+
+.btn-line{
+  display:inline-block; background:#06C755; color:#fff; font-weight:800;
+  padding:16px 32px; border-radius:999px; text-decoration:none;
+  box-shadow:0 6px 18px rgba(6,199,85,.25);
+}
+.btn-line:hover{ filter:brightness(1.05) }
+
+/* スマホ調整 */
+@media (max-width:600px){
+  .hero{ height:75vh }                 /* ちょい低め */
+  .hero h1{ font-size:2rem }
+  .hero p{ font-size:1rem }
+}
+
+
+/* ---- hero下端〜eligibilityまでを #ececec で統一 ---- */
+
+/* ヒーロー自体の下端カラーを #ececec に */
+.hero,
+.lp-hero { /* どちらでも使っている方に効きます */
+  background-color: #ececec; /* SVGの透過部や下端がこの色に馴染む */
+}
+
+/* オーバーレイは上だけ少し白を被せ、下に行くほど透明にして #ececec を活かす */
+.hero-overlay{
+  background: linear-gradient(
+    to bottom,
+    rgba(255,255,255,0.35) 0%,
+    rgba(255,255,255,0.20) 55%,
+    rgba(255,255,255,0.00) 100%
+  );
+}
+
+/* ヒーロー直下の2セクションを #ececec に */
+#awareness,
+#eligibility{
+  background-color:#ececec;
+}
+
+/* （任意）境目のわずかな白スジ対策：最初の要素の上マージンを打ち消す */
+#awareness > *:first-child{ margin-top: 0; }
+#eligibility > *:first-child{ margin-top: 0; }
+
+
+/* ============ 1) 背景 #ececec を当てる範囲 ============ */
+/* 「ほとんどの方が申請できておりません」セクション */
+#awareness, .lp-awareness { background:#ececec; }
+
+/* 「あなたが社会保険の受給対象か、確認しませんか？」セクション */
+#eligibility { background:#ececec; }
+
+/* ヒーロー直下の地色も #ececec に揃える */
+.hero, .lp-hero { background-color:#ececec; }
+/* 既存の白っぽいオーバーレイを弱める/無効化（背景が透けて見えないように） */
+.hero-overlay { background: transparent; } /* 必要なら rgba(255,255,255,.15) など薄めでもOK */
+
+
+
+/* Hero */
+.hero{
+  position:relative;
+  width:100%;
+  height:100vh;                 /* 画面一杯 */
+  display:flex; align-items:center; justify-content:center;
+  background-repeat:no-repeat;
+  background-position:center bottom; /* 下寄せ */
+  background-size:cover;
+}
+
+/* 画像パスはCSSの場所基準。img/配下ならコレ */
+.hero--cats{
+  background-image:url("img/nekkoshero.svg");
+}
+
+.hero-overlay{
+  width:100%; height:100%;
+  background:rgba(255,255,255,.35);  /* 0.35に薄める */
+  display:flex; align-items:center; justify-content:center;
+  text-align:center; padding:20px;
+}
+
+.hero-content{ max-width:900px; color:#2a1a0a }
+.hero h1{ font-size:3rem; font-weight:800; line-height:1.35; margin:0 0 1.2rem }
+.hero p{ font-size:1.2rem; margin:0 0 2rem }
+
+.btn-line{
+  display:inline-block; background:#06C755; color:#fff; font-weight:800;
+  padding:16px 32px; border-radius:999px; text-decoration:none;
+  box-shadow:0 6px 18px rgba(6,199,85,.25);
+}
+.btn-line:hover{ filter:brightness(1.05) }
+
+/* スマホ調整 */
+@media (max-width:600px){
+  .hero{ height:75vh }                 /* ちょい低め */
+  .hero h1{ font-size:2rem }
+  .hero p{ font-size:1rem }
+}
+
+
+
+/* === ヒーロー：SVGを全面、テキストを上に重ねる === */
+.hero.hero--cats{
+  position: relative;
+  min-height: 92vh;                 /* 画面ほぼ全面に */
+  background: #ececec url("img/nekkoshero.svg") no-repeat center bottom;
+  background-size: cover;           /* 全面にフィット（縦横比保持） */
+  overflow: hidden;
+}
+
+/* オーバーレイは透明（薄くしたくないため） */
+.hero-overlay{ background: transparent !important; }
+
+/* テキストを“上にかぶせる”：中央寄せ。猫にかぶりにくいよう少し上げる */
+.hero-content{
+  position: absolute; inset: 0;     /* セクション全面をテキスト領域に */
+  display: flex; flex-direction: column;
+  align-items: center; justify-content: center;
+  text-align: center;
+  padding: 24px;
+  transform: translateY(-6vh);      /* 文字を気持ち上へ（猫の安全域を作る） */
+  z-index: 2;
+}
+
+/* 見出し・リード・ボタンの間隔はここで調整 */
+.hero-content h1{ margin: 0 0 18px; line-height: 1.25; }
+.hero-content p { margin: 0 0 28px; line-height: 1.7; }
+
+/* ボタン：下に余白を足して猫にかぶりにくく */
+.btn-line{
+  display:inline-block;
+  background:#06C755; color:#fff; font-weight:800;
+  padding:16px 32px; border-radius:999px; text-decoration:none;
+  box-shadow:0 6px 18px rgba(6,199,85,.25);
+  margin-bottom: min(10vh, 120px);  /* 画面下に“安全域” */
+  position: relative; z-index: 3;
+}
+
+/* スマホ微調整（テキストをもう少し上へ） */
+@media (max-width: 768px){
+  .hero.hero--cats{ min-height: 88vh; }
+  .hero-content{ transform: translateY(-10vh); padding: 16px; }
+  .hero-content h1{ font-size: clamp(22px, 6vw, 32px); }
+  .hero-content p { font-size: clamp(14px, 3.6vw, 16px); }
+}
+
+/* 全ページで横スクロールが出ないよう保険（任意） */
+html, body { overflow-x: hidden; }
+
+/* --- ヒーローの横位置を微調整できる変数を用意 --- */
+:root { --hero-x: 0px; } /* 右に寄って見えるなら負の値、左に寄るなら正の値 */
+
+/* 背景方式で表示している場合 */
+.hero.hero--cats{
+  background:
+    #ececec
+    url("img/nekkoshero.svg")
+    no-repeat
+    calc(50% + var(--hero-x)) bottom / cover;
+}
+
+/* <img class="hero-art"> で重ねている方式ならこちら（どちらか一方だけ使う） */
+.hero-art{
+  left: 50%;
+  transform: translateX(calc(-50% + var(--hero-x)));
+}
+
+
+/* ===== Hero Final (rebuild) ===================================== */
+/* 横スクロール保険 */
+html, body { overflow-x: hidden; }
+
+/* 視覚中心の微調整ノブ：右へ寄って見えるときは負の値に */
+:root { --hero-x: 0px; }  /* 例: -48px / +24px などで調整 */
+
+/* ヒーロー本体：SVG全面＋テキスト重ね */
+.hero.hero--cats{
+  position: relative;
+  min-height: 92vh;
+  /* SVG を画面いっぱい。水平方向は --hero-x で微調整 */
+  background:
+    #ececec
+    url("img/nekkoshero.svg")
+    no-repeat
+    calc(50% + var(--hero-x)) bottom / cover;
+  overflow: hidden;
+}
+
+/* オーバーレイは完全透明（薄くならないように） */
+.hero-overlay{
+  position: static;
+  width: 100%; height: 100%;
+  background: transparent !important;
+  display: flex; align-items: center; justify-content: center;
+  text-align: center;
+}
+
+/* テキストを中央に重ね、猫に被らないよう少し上げる */
+.hero-content{
+  position: absolute; inset: 0;
+  display: flex; flex-direction: column; align-items: center; justify-content: center;
+  padding: 24px;
+  transform: translateY(-6vh);
+  z-index: 2;
+  color: #2a1a0a;
+}
+.hero-content h1{ margin: 0 0 18px; line-height: 1.25; }
+.hero-content p { margin: 0 0 28px; line-height: 1.7; }
+
+/* ボタン：下に安全域を確保（猫にかぶらない） */
+.btn-line{
+  display:inline-block; background:#06C755; color:#fff; font-weight:800;
+  padding:16px 32px; border-radius:999px; text-decoration:none;
+  box-shadow:0 6px 18px rgba(6,199,85,.25);
+  margin-bottom: min(10vh, 120px);
+  position: relative; z-index: 3;
+}
+.btn-line:hover{ filter:brightness(1.05) }
+
+/* ヒーロー直下〜eligibility までを #ececec に統一 */
+#awareness, #eligibility { background-color:#ececec; }
+
+/* レスポンシブ微調整 */
+@media (max-width: 768px){
+  .hero.hero--cats{ min-height: 88vh; }
+  .hero-content{ transform: translateY(-10vh); padding: 16px; }
+  .hero-content h1{ font-size: clamp(22px, 6vw, 32px); }
+  .hero-content p { font-size: clamp(14px, 3.6vw, 16px); }
+}
+
+/* ===== /Hero Final ================================================= */
+
+
+.hero {
+  text-align: center;   /* ← これで中央寄せ */
+}
+
+.hero h1, 
+.hero p {
+  margin-left: auto;
+  margin-right: auto;
+  text-align: center;   /* 念押し */
+  max-width: 800px;     /* 行の横幅を制限すると読みやすい */
+}
+
+
+/***** RESET: 余計な背景/擬似要素/ブレンドを無効化 *****/
+.hero,
+.hero * {
+  box-sizing: border-box;
+}
+.hero,
+.hero::before,
+.hero::after,
+.hero-overlay,
+.hero-overlay::before,
+.hero-overlay::after {
+  background: transparent !important;
+  filter: none !important;
+  mix-blend-mode: normal !important;
+  opacity: 1 !important;
+  box-shadow: none !important;
+  border: 0 !important;
+  /* 擬似要素が白パネルを描いていた場合の保険 */
+  content: normal !important;
+}
+
+/***** レイアウトを “IMG重ね方式” に統一（background画像は使わない） *****/
+.hero.hero--cats{
+  position: relative;
+  min-height: 92vh;
+  background-color: #ececec !important;      /* 地色だけ */
+  overflow: hidden;
+}
+
+/***** テキストを確実に中央へ *****/
+.hero-content{
+  position: absolute;
+  top: 50%; left: 50%;
+  transform: translate(-50%, calc(-50% - 6vh)); /* ちょい上げ */
+  width: min(92vw, 1100px);                      /* 行幅を制限して中央 */
+  text-align: center;
+  z-index: 2;
+}
+.hero-content h1{ margin: 0 0 18px; line-height: 1.25; }
+.hero-content p { margin: 0 0 28px; line-height: 1.7; }
+
+/***** ボタン *****/
+.btn-line{
+  display:inline-block;
+  padding:16px 32px;
+  background:#06C755; color:#fff; font-weight:800; text-decoration:none;
+  border-radius:999px; box-shadow:0 6px 18px rgba(6,199,85,.25);
+  position: relative; z-index: 3;
+  margin-bottom: min(10vh, 120px); /* 猫にかぶらない安全域 */
+}
+
+/***** 猫SVG（横ズレ調整ノブを用意） *****/
+:root { --hero-x: 0px; }  /* 右に寄って見えるなら正、左なら負に */
+
+.hero-art{
+  position: absolute;
+  bottom: 0; left: 50%;
+  transform: translateX(calc(-50% + var(--hero-x)));
+  width: min(1200px, 92vw); height: auto;
+  max-width: none;
+  z-index: 1;
+  pointer-events: none;
+}
+
+/***** モバイル微調整 *****/
+@media (max-width: 768px){
+  .hero.hero--cats{ min-height: 88vh; }
+  .hero-content{ transform: translate(-50%, calc(-50% - 10vh)); width: min(94vw, 760px); }
+  :root { --hero-x: 0px; }
+}
+
+
+/* ==== 猫SVGを前のサイズ感に：幅=画面いっぱい、スケール可 ==== */
+
+/* つまみ：水平方向の補正＆拡大率 */
+:root{
+  --hero-x: 0px;       /* 右に寄って見えたら正、左なら負 */
+  --hero-scale: 1.18;  /* 大きさ（1.0=等倍、1.18=18%拡大） */
+}
+
+/* セクション地色と安全域（猫に被らない） */
+.hero.hero--cats{
+  background: #ececec !important;
+  min-height: 92vh;
+  padding-bottom: clamp(240px, 26vh, 340px); /* 猫の高さぶん余白を確保 */
+  position: relative;
+  overflow: hidden;
+}
+
+/* 文字は中央固定のまま */
+.hero-content{
+  position: absolute; inset: 0;
+  display:flex; flex-direction:column; align-items:center; justify-content:center;
+  text-align:center; padding:24px;
+  transform: translate(-50%, calc(-50% - 6vh));
+  left:50%; top:50%; z-index:2;
+}
+
+/* 猫SVG：画面幅100% + スケールで以前の“迫力”に戻す */
+.hero-art{
+  position:absolute; bottom:0; left:50%;
+  width:100vw;              /* 画面いっぱい */
+  max-width:none; height:auto;
+  transform-origin: bottom center;  /* 下基準で拡大縮小 */
+  transform: translateX(calc(-50% + var(--hero-x))) scale(var(--hero-scale));
+  z-index:1; pointer-events:none;
+}
+
+/* スマホは少しだけ縮める＆補正弱める */
+@media (max-width:768px){
+  :root{
+    --hero-x: 0px;
+    --hero-scale: 1.06;
+  }
+  .hero.hero--cats{ min-height: 88vh; padding-bottom: clamp(200px, 24vh, 300px); }
+  .hero-content{ transform: translate(-50%, calc(-50% - 10vh)); padding:16px; }
+}
+
+
+/* ==== HeroのLINEボタン：位置微調整ノブ ==== */
+/* 上に上げたいときは負の値（例: -32px）、下げたいときは正の値（例: 24px） */
+:root{
+  --cta-shift-y: 180px;                 /* デフォルトは移動なし */
+  --cta-bottom-safe: min(10vh,80px); /* 猫に被らない“安全域”。小さくすると下がる */
+}
+
+/* ヒーローのLINEボタンに適用（最後に置くことで既存定義を上書き） */
+.hero-content .btn-line{
+  margin-bottom: var(--cta-bottom-safe);
+  /* CSS Transform を使わずレイアウトに影響しにくい translate を採用 */
+  translate: 0 var(--cta-shift-y);
+}
+
+/* 端末別に違う位置にしたい場合（例） */
+@media (max-width: 768px){
+  :root{
+    --cta-shift-y: -12px;     /* スマホでは少し上へ */
+    --cta-bottom-safe: 14vh;  /* 安全域を少し広げる（下げたい時は小さく） */
+  }
+}
+
+
+
+
+
+.nayami {
+  padding: 60px 20px;
+  text-align: center;
+  background: #fff;
+}
+
+.section-title {
+  font-size: 1.6rem;
+  margin-bottom: 32px;
+}
+
+.nayami-list {
+  display: grid;
+  gap: 24px;
+  grid-template-columns: repeat(4, 1fr);
+  max-width: 1100px;
+  margin: 0 auto;
+}
+
+.nayami-card {
+  background: #fff;
+  border-radius: 16px;
+  padding: 16px 12px;
+  box-shadow: 0 4px 12px rgba(0,0,0,.08);
+}
+
+.nayami-card img {
+  max-width: 100%;
+  height: auto;
+  margin-bottom: 12px;
+}
+
+.nayami-card h3 {
+  font-size: 1rem;
+  margin: 8px 0 4px;
+  font-weight: bold;
+}
+
+.nayami-card p {
+  font-size: 0.9rem;
+  color: #555;
+  margin: 0;
+}
+
+/* レスポンシブ対応 */
+@media (max-width: 992px) {
+  .nayami-list {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (max-width: 520px) {
+  .nayami-list {
+    grid-template-columns: 1fr;
+  }
+}
+
+
+/* 共通：水彩マーカー風（背景ににじみ感） */
+.marker-udl{
+  position: relative;
+  display: inline;
+  /* 文字と干渉しない程度に薄く */
+  background: linear-gradient(
+    transparent 58%,
+    rgba(236, 71, 65, 0.877) 0 86%,
+    transparent 0
+  );
+  border-radius: .18em;     /* 角を少し丸く */
+  padding: 0 .06em;         /* 行の折返しで切れにくく */
+}
+
+/* 太めにしたい箇所用（見出しなど） */
+.marker-udl--thick{
+  background: linear-gradient(
+    transparent 52%,
+    rgba(246,167,198,.42) 0 92%,
+    transparent 0
+  );
+}
+
+/* カラーバリエーション（必要に応じて付け替え） */
+.marker-udl--pink   { background: linear-gradient(transparent 58%, rgba(246,167,198,.38) 0 86%, transparent 0); }
+.marker-udl--mint   { background: linear-gradient(transparent 58%, rgba(165,232,210,.38) 0 86%, transparent 0); }
+.marker-udl--yellow { background: linear-gradient(transparent 58%, rgba(255,231,138,.42) 0 86%, transparent 0); }
+.marker-udl--blue   { background: linear-gradient(transparent 58%, rgba(164,198,255,.38) 0 86%, transparent 0); }
+
+/* SPでやや太く近づける（視認性アップ） */
+@media (max-width: 768px){
+  .marker-udl,
+  .marker-udl--thick{
+    background: linear-gradient(
+      transparent 54%,
+      rgba(246,167,198,.42) 0 92%,
+      transparent 0
+    );
+  }
+}
+
+
+/* 色や高さを少し触るだけで雰囲気を変えられるように変数化 */
+:root{
+  --bridge-height: 100px;   /* 全体の高さ */
+  --paw-show: 1;            /* 0なら肉球を非表示 */
+}
+
+.bridge--subtle{
+  position: relative;
+  width: 100%;
+  line-height: 0;
+  overflow: hidden;
+}
+.bridge--subtle > svg{
+  display:block;
+  width:100%;
+  height: var(--bridge-height);
+}
+
+/* 肉球（右下に小さく） */
+.bridge--subtle .paw{
+  position:absolute;
+  right:18px;
+  bottom:8px;
+  transform: rotate(-12deg);
+  opacity: calc(var(--paw-show));
+  pointer-events:none;
+}
+
+/* モバイルは少しコンパクトに */
+@media (max-width: 768px){
+  :root{ --bridge-height: 80px; }
+  .bridge--subtle .paw{ right:12px; bottom:6px; width:38px; height:38px; }
+}
+
+
+
+
+/* =============== Parallax band =============== */
+.lp-parallax{
+  position: relative;
+  min-height: 70vh;              /* 高さは好みで */
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position: center top;
+  background-attachment: fixed;  /* デスクトップでパララックス */
+  isolation: isolate;
+}
+/* ふんわり白グラデで上下を馴染ませる */
+.lp-parallax::before{
+  content:"";
+  position:absolute; inset:0;
+  background:linear-gradient(#fff 0%, transparent 20%, transparent 80%, #fff 100%);
+  pointer-events:none; z-index:-1;
+}
+/* 画像指定（WebP→PNGフォールバック） */
+.lp-parallax--bg1{
+  background-image: url("img/BG1.webp");
+}
+@supports not (background-image: url("img/x.webp")) {
+  .lp-parallax--bg1{ background-image: url("img/BG1.png"); }
+}
+/* iOS対策：モバイルでは固定をオフ（スクロール負荷軽減） */
+@media (max-width: 1024px), (prefers-reduced-motion: reduce){
+  .lp-parallax{ background-attachment: scroll; background-position:center; }
+}
+
+
+:root{
+  /* ヒーローの高さ（仮値）。後述のJSを入れると自動で実寸に更新されます */
+  --hero-height: 520px;
+  --hero-fade: 80px; /* 切替部の馴染ませ幅 */
+}
+
+/* 画面全体の背面に固定配置する背景レイヤー */
+.site-bg{
+  position: fixed;
+  inset: 0;
+  z-index: -1;                 /* ぜったい背面 */
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position: center top;
+  background-attachment: fixed; /* デスクトップでパララックス風 */
+}
+
+/* 画像指定（WebP→PNGフォールバック） */
+.site-bg--BG1{ background-image: url("img/BG1.webp"); }
+@supports not (background-image: url("x.webp")) {
+  .site-bg--BG1{ background-image: url("img/BG1.png"); }
+}
+
+/* ヒーロー部分は白で覆って、直下から背景が見えるようにする */
+.site-bg::before{
+  content:"";
+  position:absolute; inset:0;
+  /* 上は白→ヒーローの直下で透明へフェード */
+  background:
+    linear-gradient(
+      #fff 0,
+      #fff var(--hero-height),
+      transparent calc(var(--hero-height) + var(--hero-fade)),
+      transparent 100%
+    );
+  pointer-events:none;
+}
+
+/* iOS等では固定をオフにして負荷軽減 */
+@media (max-width: 1024px), (prefers-reduced-motion: reduce){
+  .site-bg{ background-attachment: scroll; }
+}
+
+
+/* 画像はとりあえず PNG を直指定（確実に出す） */
+.site-bg--BG1{ background-image: url("img/BG1.png"); }
+
+/* 背景レイヤーが見えるように body を透明に */
+html, body{ background: transparent !important; }
+
+/* iOS等の負荷対策はそのまま */
+@media (max-width:1024px), (prefers-reduced-motion: reduce){
+  .site-bg{ background-attachment: scroll; }
+}
+
+.lp-band, .lp-section{ background: rgba(255,255,255,.92); } /* うっすら透過 */
+
+/* ---- 全体背景を見せるための上書き ---- */
+
+/* 1) ラッパーやセクションの塗りを透明化 */
+html, body, main, .main, .page, #top {
+  background: transparent !important;
+}
+section, .lp-band, .lp-section {
+  background-color: transparent !important;
+  background-image: none !important;     /* グラデや柄も消す */
+}
+section::before, section::after,
+.lp-band::before, .lp-band::after {
+  background: none !important;            /* 疑似要素での塗りを無効化 */
+}
+
+/* 2) 読みやすさのため、”中の箱”だけ白を維持 */
+.lp-card, .lp-panel, .lp-box, .lp-cta, .lp-pricing,
+.lp-voice-case, .lp-feature, .lp-white {
+  background: rgba(255,255,255,.96) !important;
+}
+
+/* 3) 背景レイヤーはPNG直指定（確実に表示） */
+.site-bg--BG1{ background-image: url("img/BG1.png"); }
+
+/* iOS負荷対策はそのまま */
+@media (max-width:1024px), (prefers-reduced-motion: reduce){
+  .site-bg{ background-attachment: scroll; }
+}
+
+.site-bg::before{ content:none !important; }   /* もしくは display:none; */
+
+/* —— 区切りデコ（白帯・肉球・波形など）を全消し —— */
+
+/* 実体要素ごと消す */
+hr, .hr,
+[class*="divider"],         /* .section-divider, .lp-divider, .paw-divider, .wave-divider… */
+[class*="separator"],       /* .section-separator, .band-separator… */
+[class*="shape-divider"],
+[class*="paw"]:not(.paw-top){
+  display:none !important;
+  background:none !important;
+  border:0 !important;
+  box-shadow:none !important;
+  height:0 !important;
+}
+
+/* 疑似要素で描いているパターンも殺す */
+section::before, section::after,
+.lp-band::before, .lp-band::after,
+.lp-section::before, .lp-section::after,
+[class*="divider"]::before, [class*="divider"]::after,
+[class*="separator"]::before, [class*="separator"]::after,
+[class*="shape-divider"]::before, [class*="shape-divider"]::after,
+[class*="paw"]:not(.paw-top)::before,
+[class*="paw"]:not(.paw-top)::after{
+  content:none !important;
+  display:none !important;
+  background:none !important;
+  border:0 !important;
+  box-shadow:none !important;
+  height:0 !important;
+}
+
+/* セクション本体に線や背景が付いている場合の保険 */
+section, .lp-band, .lp-section{
+  background: transparent !important;
+  border-top: 0 !important;
+  border-bottom: 0 !important;
+  box-shadow: none !important;
+  -webkit-mask: none !important;
+  mask: none !important;
+}
+
+
+/* ====== 見出しを中央に ====== */
+/* 共通：タイトル系 */
+.lp-title,
+.section-title,
+.lp-section > h1, .lp-section > h2, .lp-section > h3,
+.lp-band    > h1, .lp-band    > h2, .lp-band    > h3{
+  text-align: center !important;
+  margin-left: auto !important;
+  margin-right: auto !important;
+}
+
+/* 指定のセクション（IDは想定。異なる場合は置き換えOK） */
+#conditions h2,            /* ほとんどの方が申請できておりません 等 */
+#cta h2,                   /* あなたが社会保険の受給対象か… */
+#flow h2,                  /* ご利用の流れ */
+#features h2,              /* サービスの特徴・サポート内容 */
+#voices h2,                /* ご利用者様の声 */
+#anonymous h2,             /* 匿名OK・相談無料 */
+#faq h2 {                  /* よくあるご質問 */
+  text-align: center !important;
+  margin-left: auto !important;
+  margin-right: auto !important;
+}
+
+/* タイトル下のリード文も中央寄せに（あれば） */
+.lp-lead, .section-lead, .lead {
+  text-align: center !important;
+  margin-left: auto; margin-right: auto;
+}
+
+/* 下線/アクセントの疑似要素を中央に（使っている場合） */
+.lp-title::after,
+.section-title::after,
+.lp-section > h2::after,
+.lp-band    > h2::after{
+  left: 50% !important;
+  transform: translateX(-50%) !important;
+}
+
+
+/* ヒーロー全体を下端でフェードアウト */
+.lp-hero, .hero, #hero{
+  position: relative;
+  -webkit-mask-image: linear-gradient(to bottom, #000 82%, transparent 100%);
+          mask-image: linear-gradient(to bottom, #000 82%, transparent 100%);
+}
+/* フェード量を調整：82%→85〜90% など */
+
+
+/* ===== しずくエッジ（.hero hero--cats 専用・衝突回避込み） ===== */
+.hero{ position:relative; z-index:0; /* 背景より手前に */ }
+/* 過去の「section::after を消す」パッチを無効化するための上書き */
+.hero.hero--cats::after{ content:"" !important; display:block !important; }
+
+.hero.hero--cats::after{
+  /* 形状・配置 */
+  position:absolute; left:0; right:0; bottom:-1px; height:var(--drip-h,120px);
+  pointer-events:none; z-index:1;
+  /* 下に被せる色（必要なら透明度を下げて馴染ませる） */
+  --drip-rgb: 255,255,255;
+  background: rgba(var(--drip-rgb), var(--drip-alpha, .98));
+
+  /* しずく形状のマスク（WebKit/標準両対応） */
+  -webkit-mask:
+    radial-gradient(40px 22px at 8% 95%,  transparent 60%, #000 62%),
+    radial-gradient(26px 18px at 23% 100%, transparent 62%, #000 64%),
+    radial-gradient(34px 20px at 41% 94%, transparent 58%, #000 60%),
+    radial-gradient(28px 18px at 60% 100%, transparent 60%, #000 62%),
+    radial-gradient(32px 20px at 77% 96%, transparent 60%, #000 62%),
+    radial-gradient(38px 22px at 92% 98%, transparent 60%, #000 62%),
+    linear-gradient(#000,#000);
+          mask:
+    radial-gradient(40px 22px at 8% 95%,  transparent 60%, #000 62%),
+    radial-gradient(26px 18px at 23% 100%, transparent 62%, #000 64%),
+    radial-gradient(34px 20px at 41% 94%, transparent 58%, #000 60%),
+    radial-gradient(28px 18px at 60% 100%, transparent 60%, #000 62%),
+    radial-gradient(32px 20px at 77% 96%, transparent 60%, #000 62%),
+    radial-gradient(38px 22px at 92% 98%, transparent 60%, #000 62%),
+    linear-gradient(#000,#000);
+
+  /* 軽い影で自然に */
+  filter: drop-shadow(0 2px 12px rgba(0,0,0,.06));
+}
+
+/* ヒーローが切ってしまう場合の保険（必要なときだけ有効化）
+.hero{ overflow:visible !important; }
+*/
+
+/* モバイルは少し控えめに */
+@media (max-width: 768px){
+  .hero.hero--cats::after{ height: calc(var(--drip-h,120px) * .75); }
+}
+
+/* マスク非対応環境のフォールバック：ゆるいフェードに */
+@supports not (mask: linear-gradient(#000,#000)){
+  .hero.hero--cats::after{
+    -webkit-mask:none; mask:none;
+    background: linear-gradient(to bottom,
+      rgba(var(--drip-rgb), .98) 0%,
+      rgba(var(--drip-rgb), .92) 60%,
+      rgba(var(--drip-rgb), 0) 100%);
+  }
+}
+
+
+/* 猫は最前面のまま */
+.hero.hero--cats{ position:relative; z-index:100; }
+
+/* 雲ベール：赤ライン位置に合わせて被せる */
+.cloud-veil{
+  --h:180px;         /* 雲の帯の厚み */
+  --overlap:-68px;   /* ヒーローへ被せる量 ← ここを微調整（例:-60～-90px） */
+
+  position:relative;
+  z-index:40;                 /* ヒーロー(100)より下、次セクションより上 */
+  height:var(--h);
+  margin-top:var(--overlap);
+  pointer-events:none;
+
+  /* 雲（上側が最も濃く、下に行くほど薄く消える） */
+  --c:255,255,255;            /* 雲色（白） */
+  background:
+    radial-gradient(160px 70px  at  6% 22%,  rgba(var(--c),.96) 35%, rgba(var(--c),.76) 60%, transparent 70%),
+    radial-gradient(240px 90px  at 22% 20%,  rgba(var(--c),.95) 32%, rgba(var(--c),.74) 60%, transparent 72%),
+    radial-gradient(200px 80px  at 40% 26%,  rgba(var(--c),.95) 34%, rgba(var(--c),.74) 60%, transparent 72%),
+    radial-gradient(220px 90px  at 60% 18%,  rgba(var(--c),.96) 32%, rgba(var(--c),.75) 60%, transparent 72%),
+    radial-gradient(200px 85px  at 78% 24%,  rgba(var(--c),.95) 34%, rgba(var(--c),.74) 60%, transparent 72%),
+    radial-gradient(170px 70px  at 94% 20%,  rgba(var(--c),.94) 35%, rgba(var(--c),.72) 60%, transparent 70%);
+  filter: blur(6px) saturate(103%);
+  /* 下方向にフェードアウト（上はしっかり、下は透明） */
+  -webkit-mask-image: linear-gradient(to bottom, #000 35%, rgba(0,0,0,.55) 70%, transparent 100%);
+          mask-image: linear-gradient(to bottom, #000 35%, rgba(0,0,0,.55) 70%, transparent 100%);
+}
+
+/* 次セクションが覆わないための安全網 */
+section, .lp-band, .lp-section{ position:relative; z-index:10; }
+
+/* モバイルは控えめに */
+@media (max-width:768px){
+  .cloud-veil{ --h:-300px; --overlap:-50px; filter: blur(40px); }
+}
+
+
+/* === LINEボタンの文言を“完全に中央”に見せる補正 === */
+/* 左の ::before と同じ幅のダミーを右側に作ってバランスを取る */
+.lp-btn-line::after{
+  content:"";
+  width:18px;              /* 左アイコンと同じ幅 */
+  height:18px;
+  display:inline-block;    /* .lp-btn の inline-flex に参加させる */
+}
+/* 念のため中央寄せを明示（既に .lp-btn で指定済みだが保険） */
+.lp-btn.lp-btn-line{ justify-content:center; }
+
+/* ===== CTAテキストの中央寄せ ===== */
+.lp-cta-panel{ text-align:center; } /* ブロック全体を中央寄せ */
+
+.lp-cta-panel .lp-cta-h,
+.lp-cta-panel .lp-cta-p,
+.lp-cta-panel .lp-cta-note{
+  text-align:center;       /* 念のため個別にも指定 */
+  margin-left:auto;
+  margin-right:auto;
+}
+
+
+/* ===== Letterbox OK：画面フィット型ヒーロー ===== */
+:root{
+  --min-h: 560px;                          /* 最低高さ */
+  --safe-bottom: clamp(56px, 9vh, 120px);  /* ボタンと下端の距離 */
+  --focus: 50% 45%;                        /* 画像の重心（必要なら調整） */
+  --letterbox: #f3f4f6;                    /* 余白(レタボ)の色 */
+}
+
+.hero-fit{
+  position: relative;
+  height: 100svh;                          /* モバイルURLバー対応 */
+  min-height: var(--min-h);
+  background: var(--letterbox);            /* 余白の色 */
+  overflow: hidden;
+}
+@supports not (height: 100svh){
+  .hero-fit{ height: 100vh; }              /* 古い環境フォールバック */
+}
+
+/* 主役画像：常に全体表示（切れない）→余白は出る */
+.hero-fit .hero-canvas{
+  position: absolute; inset: 0;
+  width: 100%; height: 100%;
+  object-fit: contain;                      /* ←肝：画面にフィット */
+  object-position: var(--focus);
+}
+
+/* テキストは常に中央。下に安全域を確保 */
+.hero-fit .hero-ui{
+  position: absolute; inset: 0; z-index: 2;
+  display: grid; place-content: center;
+  text-align: center;
+  padding: clamp(16px, 4vw, 40px);
+}
+.hero-fit .hero-ui h1{
+  font-size: clamp(24px, 6vw, 52px); line-height: 1.2; margin: 0 0 .6em;
+}
+.hero-fit .hero-ui p{
+  font-size: clamp(14px, 2.8vw, 18px); color:#4b5563; margin: 0 0 1.2em;
+}
+.hero-fit .btn-line{
+  display:inline-block; margin-bottom: var(--safe-bottom);
+}
+
+
+/* ==== Full-bleed Hero RESET for #top ==== */
+:root{
+  --hero-min: 560px;
+  --hero-max: 900px;
+  --focus: 50% 45%;                      /* 見せたい重心（必要なら調整） */
+  --safe-bottom: clamp(48px, 8vh, 96px); /* ボタンの下余白 */
+}
+
+/* コンテナ：高さ確保＋余計なレイヤーの干渉を遮断 */
+#top.hero-cover{
+  position: relative;
+  height: clamp(var(--hero-min), 72svh, var(--hero-max));
+  min-height: var(--hero-min);
+  overflow: hidden;
+  isolation: isolate;
+  background-image: none !important;
+}
+@supports not (height: 1svh){
+  #top.hero-cover{ height: clamp(var(--hero-min), 72vh, var(--hero-max)); }
+}
+
+/* #top内は “主役画像” と “中央UI” 以外は見せない（重複排除） */
+#top.hero-cover > :not(.hero-media):not(.hero-ui){ display:none !important; }
+#top.hero-cover::before,
+#top.hero-cover::after{ content: none !important; }  /* 擬似要素の雲などを無効化 */
+
+/* 主役画像：余白ゼロで全面表示（必要ならトリミング） */
+#top.hero-cover .hero-media{ position:absolute; inset:0; z-index:0; }
+#top.hero-cover .hero-media > img{
+  width:100%; height:100%; display:block;
+  object-fit: cover;                      /* ★隙間を出さない */
+  object-position: var(--focus);
+  pointer-events:none;
+}
+
+/* 中央UI */
+#top.hero-cover .hero-ui{
+  position:absolute; inset:0; z-index:2;
+  display:grid; place-content:center; text-align:center;
+  padding: clamp(16px, 4vw, 40px);
+}
+#top.hero-cover .hero-ui h1{
+  font-size: clamp(24px, 6vw, 52px); line-height:1.2; margin:0 0 .6em;
+}
+#top.hero-cover .hero-ui p{
+  font-size: clamp(14px, 2.6vw, 18px); color:#4b5563; margin:0 0 1.2em;
+}
+
+/* LINEボタン：巨大化防止 */
+#top.hero-cover .btn-line{
+  display:inline-block; white-space:nowrap;
+  font-size: clamp(14px, 1.1vw, 18px);
+  padding: clamp(10px, 1.1vw, 14px) clamp(18px, 2vw, 26px);
+  border-radius: 9999px; line-height:1;
+  width:auto; max-width: 360px;
+  margin-bottom: var(--safe-bottom);
+}
+
+
+/* ==== Full-bleed Hero / bottom-anchored（下端は切らない） ==== */
+:root{
+  --hero-min: 560px;
+  --hero-max: 900px;
+  --focus: 50% 100%;                    /* ★下端固定（bottom center） */
+  --safe-bottom: clamp(80px, 12vh, 180px); /* ★猫の上を空ける安全域 */
+}
+
+/* コンテナ高さ＋重複レイヤーの無効化（以前と同じ） */
+#top.hero-cover{
+  position: relative;
+  height: clamp(var(--hero-min), 72svh, var(--hero-max));
+  min-height: var(--hero-min);
+  overflow: hidden;
+  isolation: isolate;
+  background-image: none !important;
+}
+#top.hero-cover::before,
+#top.hero-cover::after{ content: none !important; }
+#top.hero-cover > :not(.hero-media):not(.hero-ui){ display:none !important; }
+@supports not (height: 1svh){
+  #top.hero-cover{ height: clamp(var(--hero-min), 72vh, var(--hero-max)); }
+}
+
+/* 主役画像：全面表示しつつ “常に下端を見せる” */
+#top.hero-cover .hero-media{ position:absolute; inset:0; z-index:0; }
+#top.hero-cover .hero-media > img{
+  width: 100%; height: 100%; display: block;
+  object-fit: cover;                    /* 余白ゼロ（必要ならトリム） */
+  object-position: var(--focus);        /* ★下端アンカー */
+  pointer-events: none;
+}
+
+/* 中央UI：下の猫に被らないように安全域を確保 */
+#top.hero-cover .hero-ui{
+  position:absolute; inset:0; z-index:2;
+  display:grid; place-content:center; text-align:center;
+  padding: clamp(16px, 4vw, 40px);
+  padding-bottom: var(--safe-bottom);    /* ★下方向に余白を追加 */
+}
+
+#top.hero-cover .hero-ui h1{
+  font-size: clamp(24px, 6vw, 52px);
+  line-height: 1.2; margin: 0 0 .6em;
+}
+#top.hero-cover .hero-ui p{
+  font-size: clamp(14px, 2.6vw, 18px);
+  color:#4b5563; margin: 0 0 1.2em;
+}
+
+/* LINEボタン：巨大化防止（そのまま） */
+#top.hero-cover .btn-line{
+  display:inline-block; white-space:nowrap;
+  font-size: clamp(14px, 1.1vw, 18px);
+  padding: clamp(10px, 1.1vw, 14px) clamp(18px, 2vw, 26px);
+  border-radius: 9999px; line-height:1;
+  width:auto; max-width: 360px;
+  margin-bottom: calc(var(--safe-bottom) - 16px);
+}
+
+
+/* ==== Full-bleed Hero（下端優先） ==== */
+:root{
+  --hero-min: 560px;
+  --hero-max: 900px;
+  --focus: 50% 100%;                      /* 画像の重心：下端固定 */
+  --safe-bottom: clamp(80px, 12vh, 180px);/* 猫に被らない下余白 */
+}
+
+#top.hero-cover{
+  position: relative;
+  height: clamp(var(--hero-min), 72svh, var(--hero-max));
+  min-height: var(--hero-min);
+  overflow: hidden;
+  isolation: isolate;
+  background-image: none !important;
+}
+@supports not (height:1svh){
+  #top.hero-cover{ height: clamp(var(--hero-min), 72vh, var(--hero-max)); }
+}
+
+/* 古いヒーロー要素が残っていても #top では非表示（重複防止） */
+#top.hero-cover::before,
+#top.hero-cover::after{ content:none !important; }
+#top.hero-cover > :not(.hero-media):not(.hero-ui){ display:none !important; }
+
+/* 背景：全面表示＋下端優先（猫を切らない） */
+#top.hero-cover .hero-media{ position:absolute; inset:0; z-index:0; }
+#top.hero-cover .hero-media > img{
+  width:100%; height:100%; display:block;
+  object-fit: cover;
+  object-position: var(--focus);
+  pointer-events:none;
+}
+
+/* 中央UI（縦並び） */
+#top.hero-cover .hero-ui{
+  position:absolute; inset:0; z-index:2;
+  display:flex; flex-direction:column; align-items:center; justify-content:center;
+  gap: clamp(12px, 1.6vw, 18px);
+  text-align:center;
+  padding: clamp(16px, 4vw, 40px);
+  padding-bottom: var(--safe-bottom);      /* 猫に被らない */
+}
+#top.hero-cover .hero-ui h1{
+  font-size: clamp(24px, 6vw, 52px);
+  line-height:1.2; margin:0;
+}
+#top.hero-cover .hero-ui .lead{
+  font-size: clamp(14px, 2.6vw, 18px);
+  color:#4b5563;
+  background: rgba(255,255,255,.78);      /* 背景の模様上でも読みやすい */
+  backdrop-filter: blur(6px);
+  padding: .45em .9em; border-radius: 12px;
+}
+
+/* LINEボタンは巨大化しないよう制御 */
+#top.hero-cover .btn-line{
+  display:inline-block; white-space:nowrap;
+  font-size: clamp(14px, 1.1vw, 18px);
+  padding: clamp(10px, 1.1vw, 14px) clamp(18px, 2vw, 26px);
+  border-radius: 9999px; line-height:1;
+  width:auto; max-width: 360px;
+}
+
+/* 「説明文の下」に置く画像（透過SVGを想定） */
+#top.hero-cover .hero-badges{ display:block; margin-top: clamp(8px, 2.4vw, 20px); }
+#top.hero-cover .hero-badges img{
+  display:block; width: min(960px, 86%); height:auto;
+  filter: drop-shadow(0 6px 10px rgba(0,0,0,.08));
+}
+
+
+/* --- Heroテキストの位置ノブ（#top専用） --- */
+:root{
+  --ui-shift-y: 6vh;                 /* 下向きオフセット（+で下に、-で上に） */
+  --hero-top-safe: clamp(32px, 8vh, 120px); /* 上側の安全域（固定ヘッダー分も含める） */
+  /* 固定ヘッダーがあるなら、その高さを入れてもOK → 例: 64px */
+  --header-h: 0px;                   /* 例: 64px にするとさらに下がる */
+}
+
+/* 中央ブロックを下にずらし、上に余白を足す（上部切れ防止） */
+#top.hero-cover .hero-ui{
+  translate: 0 var(--ui-shift-y) !important;
+  padding-top: calc(var(--hero-top-safe) + var(--header-h)) !important;
+  /* もしまだ上に寄るなら ↓ を有効に（中央寄せ→上寄せにして明示的に下げる）
+     justify-content: flex-start;
+  */
+}
+
+/* モバイルでは少し戻す例 */
+@media (max-width: 768px){
+  :root{ --ui-shift-y: 2vh; --hero-top-safe: clamp(24px, 6vh, 96px); }
+}
+
+
+/* ===== #top ヒーローのバランス調整 ===== */
+:root{
+  /* テキスト塊の上下位置（+で下げる） */
+  --ui-shift-y: 2.5vh;
+
+  /* 猫との距離：大きくするとバッジが猫から離れる */
+  --safe-bottom: clamp(110px, 15vh, 220px);
+
+  /* 縦の基本間隔（見出し↔説明↔ボタン↔バッジ） */
+  --ui-gap: clamp(8px, 1.2vw, 16px);
+
+  /* バッジの横幅（小さくして圧迫感を減らす） */
+  --badges-w: clamp(520px, 46vw, 680px);
+
+  /* 見出しの最大幅（行が長すぎるのを防ぐ） */
+  --h1-max: min(980px, 86vw);
+
+  /* 説明文の最大幅 */
+  --lead-max: min(720px, 80vw);
+}
+
+/* テキスト塊の位置と幅 */
+#top.hero-cover .hero-ui{
+  translate: 0 var(--ui-shift-y);
+  padding-bottom: var(--safe-bottom);            /* 猫との距離 */
+  gap: var(--ui-gap);
+  align-items: center;
+  max-width: min(1100px, 92vw);
+  margin-inline: auto;
+  text-align: center;
+}
+
+/* 見出し：行長とサイズを少し抑える */
+#top.hero-cover .hero-ui h1{
+  font-size: clamp(24px, 5.4vw, 48px);          /* ← 52px → 48px に下げる */
+  max-width: var(--h1-max);
+  margin: 0 auto .2em;
+  text-wrap: balance;
+}
+
+/* 説明文プレート：幅と余白を控えめに */
+#top.hero-cover .hero-ui .lead{
+  max-width: var(--lead-max);
+  margin: 0 auto;
+  padding: .32em .8em;                           /* ほんの少し薄く */
+}
+
+/* バッジ画像：小さめ＆中央 */
+#top.hero-cover .hero-badges{
+  margin-top: clamp(4px, 1vw, 12px);
+}
+#top.hero-cover .hero-badges img{
+  width: var(--badges-w);
+  height: auto;
+  display: block;
+  margin-inline: auto;
+}
+
+/* 1200px以上でさらに整える（任意） */
+@media (min-width: 1200px){
+  :root{
+    --ui-shift-y: 3vh;          /* もう少し下げたい場合は 4vh まで */
+    --badges-w: clamp(560px, 42vw, 640px);
+  }
+}
+
+
+
+/* ===== 入場直後だけ：上下は必ず全表示（左右だけトリム） ===== */
+/* ヒーローの高さ（未設定なら有効に） */
+#top.hero-cover{ height: clamp(560px, 72svh, 900px); position: relative; overflow: hidden; }
+@supports not (height:1svh){ #top.hero-cover{ height: clamp(560px, 72vh, 900px); } }
+
+/* 通常は cover（下端優先） */
+#top.hero-cover .hero-media{ position:absolute; inset:0; z-index:0; }
+#top.hero-cover .hero-media > img{
+  width:100%; height:100%;
+  object-fit: cover;                 /* 余白ゼロ */
+  object-position: 50% 100%;         /* 下端優先（猫を切らない） */
+  display:block; pointer-events:none;
+}
+
+/* ★入場直後フラグ is-intro のときだけ、高さフィット＝上下は必ず見える */
+#top.hero-cover.is-intro .hero-media > img{
+  width: auto !important;
+  height: 100% !important;           /* ←ここが肝 */
+  max-width: none !important;
+  position: absolute !important; top: 0 !important; left: 50% !important;
+  transform: translateX(-50%) !important;   /* 左右の中心に */
+  object-fit: contain !important;     /* 念のため */
+}
+
+
+/* === HERO (final) =============================== */
+:root{
+  --hero-min: 560px;
+  --hero-max: 900px;
+  --hero-letterbox:#ececec;              /* レターボックスの色（許容） */
+  --focus: 50% 100%;                     /* 画像の重心：底面固定（猫を切らない） */
+  --safe-bottom: clamp(80px,12vh,180px); /* 猫に被らない余白 */
+}
+
+/* コンテナ */
+#top.hero-cover{
+  position: relative;
+  height: clamp(var(--hero-min), 72svh, var(--hero-max));
+  min-height: var(--hero-min);
+  overflow: hidden;
+  isolation: isolate;
+  background: none !important;
+}
+@supports not (height:1svh){
+  #top.hero-cover{ height: clamp(var(--hero-min), 72vh, var(--hero-max)); }
+}
+
+/* 背景画像（通常は cover＋底面優先） */
+#top.hero-cover .hero-media{ position:absolute; inset:0; z-index:0; }
+#top.hero-cover .hero-media > img{
+  width:100%; height:100%; display:block;
+  object-fit: cover;
+  object-position: var(--focus);
+  pointer-events:none;
+  background: var(--hero-letterbox);     /* 万一の余白色 */
+}
+
+/* 中央UI */
+#top.hero-cover .hero-ui{
+  position:absolute; inset:0; z-index:2;
+  display:grid; place-content:center; text-align:center;
+  gap:clamp(12px,1.6vw,18px);
+  padding: clamp(16px, 4vw, 40px);
+  padding-bottom: var(--safe-bottom);
+}
+#top.hero-cover .hero-ui h1{
+  font-size: clamp(24px, 5.4vw, 48px);
+  line-height: 1.2; margin: 0;
+}
+#top.hero-cover .hero-ui .lead{
+  font-size: clamp(14px, 2.6vw, 18px);
+  color:#4b5563;
+  background: rgba(255,255,255,.78);
+  backdrop-filter: blur(6px);
+  padding:.45em .9em; border-radius:12px; margin:0;
+}
+/* 説明文の下の透過SVG（バッジ） */
+#top.hero-cover .hero-badges{ display:block; margin-top: clamp(6px, 1.6vw, 16px); }
+#top.hero-cover .hero-badges img{
+  width: min(960px, 86%); height:auto; display:block; margin-inline:auto;
+  filter: drop-shadow(0 6px 10px rgba(0,0,0,.08));
+}
+
+/* ★ 入場直後：上下は必ず全部見せる（左右はトリム or 余白OK）＋画面いっぱい */
+#top.hero-cover.is-intro{ height: 100dvh !important; background: var(--hero-letterbox); }
+@supports not (height:100dvh){ #top.hero-cover.is-intro{ height: 100vh !important; } }
+#top.hero-cover.is-intro .hero-media > img{
+  width:auto !important; height:100% !important; max-width:none !important;
+  object-fit: contain !important; object-position:50% 50% !important;
+  position:absolute !important; left:50% !important; top:0 !important;
+  transform: translateX(-50%) !important;
+}
+/* ================================================ */
+
+
+/* ===== Paw to Top (右下肉球) ===== */
+.paw-top{
+  --size: 84px;
+  --pad: 12px;                /* 画面端からの距離 */
+  --bottom-extra: 0px;        /* JSで下部CTA分を加算 */
+
+  position: fixed;
+  right: clamp(10px, 2vw, 20px);
+  bottom: calc(clamp(10px, 2.4vh, 20px) + var(--bottom-extra));
+  z-index: 1200;
+  width: var(--size);
+  height: var(--size);
+  display: grid;
+  place-items: center;
+  border-radius: 0;
+  background: transparent;
+  box-shadow: none;
+  backdrop-filter: none;
+  -webkit-backdrop-filter: none;
+  /* 表示/非表示（初期は非表示） */
+  opacity: 0;
+  pointer-events: none;
+  transform: scale(.92);
+  transition:
+    opacity .25s ease,
+    transform .15s ease,
+    box-shadow .25s ease;
+}
+.paw-top.is-show{
+  opacity: 1;
+  pointer-events: auto;
+  transform: scale(1);
+}
+
+.paw-top img{
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  filter: drop-shadow(0 1px 0 rgba(0,0,0,.22));
+  user-select: none;
+  pointer-events: none;
+}
+
+/* ぷにっ（ホバー） */
+@keyframes paw-puni {
+  0%   { transform: scale(1); }
+  60%  { transform: scale(1.12); }
+  100% { transform: scale(1.04); }
+}
+.paw-top:hover{
+  animation: paw-puni .18s cubic-bezier(.2,.9,.2,1) both;
+  box-shadow: none;
+}
+.paw-top:active{ transform: scale(.96); }
+
+/* モバイルは少し小さめ */
+@media (max-width: 768px){
+  .paw-top{ --size: 56px; }
+}
+
+/* 動きが苦手な人向け配慮 */
+@media (prefers-reduced-motion: reduce){
+  .paw-top,
+  .paw-top:hover{ animation: none !important; transition: none !important; }
+}
+
+
+.paw-top{ display:grid !important; z-index:4000 !important; }
+
+
+/* トップへ戻るときはスクロールアンカーを無効化して押し下げを防ぐ */
+ html.scrolling-to-top,
+ body.scrolling-to-top{
+   overflow-anchor: none;
+   scroll-behavior: auto;  /* グローバルの smooth を一時停止 */
+ }
+
+ /* ヒーローの高さが滑らかに変わるように */
+#top.hero-cover { transition: height .35s ease; }
+/* 初回/上端付近はほぼ全画面表示に */
+#top.hero-cover.is-intro { height: 92svh; }
+/* 通常時の高さは既存の clamp(...) 指定をそのまま利用でOK */
+
+
+/* === LINEボタン（共通） === */
+.btn-line{
+  --line-green:#00B900; /* LINE公式トーンに近い */
+  display:inline-flex; align-items:center; gap:.6em;
+  padding:.9em 1.2em; border-radius:999px;
+  font-weight:700; text-decoration:none;
+  background:var(--line-green); color:#fff;
+  box-shadow:0 6px 18px rgba(0,0,0,.12), inset 0 -2px 0 rgba(0,0,0,.1);
+  transition:transform .12s ease, box-shadow .2s ease, filter .2s ease;
+}
+.btn-line::before{
+  content:""; width:1.2em; height:1.2em; flex:0 0 1.2em;
+  background:#fff; border-radius:50%;
+  mask: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 36 36"><path d="M30.3 17.2c0-6.1-6-11-13.3-11S3.7 11.1 3.7 17.2c0 5.5 4.9 10.1 11.4 10.9.4.1.9.3 1 .7.1.4.1.9.1 1.3 0 0-.1 2.6-.2 2.9 0 0-.1.6.5.3.6-.3 3.9-2.6 5.3-3.7.4-.3.9-.4 1.4-.3 3.7-.7 6.1-2.3 7.1-3.2 2.6-2.3 3.9-5.1 3.9-8.9z" fill="%23000"/></svg>') center / 80% 80% no-repeat;
+}
+.btn-line:hover{ transform:translateY(-1px); filter:brightness(1.03); }
+.btn-line:active{ transform:translateY(1px) scale(.99); }
+
+/* ヒーロー専用の間隔調整（必要なら） */
+.hero-line-button{ margin-top:.8rem; font-size:1.05rem; }
+@media (max-width:768px){
+  .hero-line-button{ width:100%; justify-content:center; }
+}
+
+/* HeroのLINEボタン（既存ボタン仕様のまま中央配置） */
+.hero-ui .hero-cta{
+  display:inline-flex;            /* 既存 .lp-btn の仕様と同じ */
+  margin: 12px auto 16px;         /* 中央寄せ（左右auto）＆適度な余白 */
+}
+@media (max-width:768px){
+  .hero-ui .hero-cta{
+    width: min(520px, 100%);      /* SPは横幅を確保して押しやすく */
+  }
+}
+
+/* 1) ヒーローのタイポ＆余白を整理 */
+.hero-ui h1{
+  line-height:1.15;
+  letter-spacing: .02em;
+  margin: 0 0 8px;           /* 見出し直下を少し詰める */
+}
+
+/* 2) リード（白い説明ボックス）を“軽く・細く・中央”に */
+.hero-ui .lead{
+  max-width: 760px;          /* だだっ広さを抑えて読みやすく */
+  margin: 0 auto;            /* 中央揃え */
+  padding: 12px 16px;
+  background: rgba(255,255,255,.85);  /* 透過で軽量化 */
+  box-shadow: 0 10px 30px rgba(0,0,0,.06);
+  border-radius: 14px;       /* 少し角を立ててシャープに */
+  font-size: 15.5px;
+}
+
+/* 3) CTA（LINE）を“主役サイズ”にし、リードと距離を取る */
+.hero-ui .hero-cta{
+  display: inline-flex;
+  margin: 14px auto 0;       /* 上に距離 → 視線の間を作る */
+  min-height: 48px;          /* タップ高さの最低ライン */
+  padding: .9em 1.4em;
+  font-size: 1.05rem;
+  box-shadow: 0 12px 28px rgba(0,0,0,.12);
+}
+@media (max-width: 768px){
+  .hero-ui .lead{ max-width: 92vw; }
+  .hero-ui .hero-cta{ width: min(520px, 100%); }
+}
+
+/* 4) ヒーロー内の“丸バッジ”が近すぎ＆大きすぎ問題の緩和
+   - もしクラス名が異なる場合は、丸バッジのラッパーに .hero-badges を付けてください */
+.hero-badges{              /* バッジ群コンテナ */
+  margin-top: 26px;        /* ボタンから距離を取る */
+  gap: 18px;               /* バッジ間の間隔 */
+}
+.hero-badges > *{          /* 各バッジ */
+  transform: scale(.9);    /* PCは1割縮小して圧迫感を軽減 */
+}
+@media (max-width: 768px){
+  .hero-badges{ margin-top: 16px; gap: 12px; }
+  .hero-badges > *{ transform: scale(.88); } /* SPは更に軽く */
+}
+
+/* 5) 猫列は“可愛いけど主張しすぎ” → 少し奥へ */
+.hero-cats{                /* 猫列のラッパー（該当要素にクラス付与推奨） */
+  opacity: .88;
+  filter: saturate(.96);
+  transform: translateY(6px);     /* バッジに被らないよう少し下げる */
+}
+
+/* 6) ヒーロー全体の視線集中用のごく薄いビネット（任意） */
+#hero::after{
+  content:""; position:absolute; inset:0;
+  pointer-events:none;
+  background: radial-gradient(ellipse at 50% 20%,
+    rgba(255,255,255,0) 0%,
+    rgba(255,255,255,0) 55%,
+    rgba(255,255,255,.55) 100%);
+}
+
+/* ========== HERO: センター寄せ & 余白調整 ========== */
+
+/* ヒーローのテキスト塊を“強制中央寄せ” */
+.hero-ui{
+  margin-left:auto; margin-right:auto;
+  text-align:center;
+}
+
+/* 見出し「退職後の…」の開始位置を中央に */
+.hero-ui h1{
+  margin-left:auto; margin-right:auto;
+  text-align:center;
+}
+
+/* リード文（白ボックス）を中央寄せにし、少しだけ軽く */
+.hero-ui .lead{
+  margin: 8px auto 0;       /* 中央＋上詰め */
+  text-align:center;        /* 文字を中央揃えに */
+  max-width: 760px;         /* 読みやすい幅を維持（任意） */
+}
+
+/* LINEボタン：位置は中央、下のバッジとのスキマを詰める */
+.hero-ui .hero-cta{
+  display:inline-flex;
+  margin: 10px auto 0;      /* ← 上のスキマを少し詰める（元が大きい場合の対策） */
+  min-height:48px;
+}
+
+/* バッジ群：ボタンとの間をさらに詰める */
+.hero-badges{               /* バッジ群のラッパー要素にこのクラスが付いている前提 */
+  margin-top: 10px;         /* ← ここでギュッと詰める（必要なら 6〜12px で微調整） */
+  display:flex; gap:18px;   /* 既にレイアウト済ならこの2行は無視されます */
+  justify-content:center;   /* 中央寄せ（flexでない場合は不要） */
+}
+
+/* SP時の微調整 */
+@media (max-width:768px){
+  .hero-ui .lead{ max-width:92vw; }
+  .hero-ui .hero-cta{ width:min(520px,100%); }
+  .hero-badges{ margin-top: 8px; gap:12px; }
+}
+
+/* === HERO 最強上書きパッチ（#top .hero-ui 専用） === */
+
+/* 1) 見出しをテキスト幅で中央に（背景装飾があっても中央開始に） */
+#top.hero-cover .hero-ui h1{
+  display:inline-block !important;
+  margin:0 auto 10px !important;   /* 中央寄せ */
+  text-align:center !important;
+  line-height:1.18;
+  letter-spacing:.02em;
+}
+
+/* 2) リード文（白ボックス）を中央揃えにする */
+#top.hero-cover .hero-ui .lead{
+  display:inline-block !important;  /* flex 等を強制解除 */
+  margin:6px auto 0 !important;     /* 中央寄せ */
+  text-align:center !important;     /* 文字を中央 */
+  max-width:760px;                   /* 読みやすい幅（任意） */
+}
+
+/* 3) LINEボタンを中央に＋下のバッジとの隙間を詰める */
+#top.hero-cover .hero-ui .hero-cta{
+  display:inline-flex !important;
+  margin:8px auto 2px !important;   /* ← ここで詰めています（2〜6pxで微調整OK） */
+  min-height:48px;
+}
+
+/* 4) バッジ群（<picture class="hero-badges">）の上マージンをさらに詰める */
+#top.hero-cover .hero-ui .hero-badges{
+  display:block !important;
+  margin-top:6px !important;        /* ← さらに詰めたい時は 4px へ */
+}
+
+/* 5) 念のため：ヒーローブロック全体もセンター基調に */
+#top.hero-cover .hero-ui{
+  text-align:center !important;
+  margin-left:auto !important;
+  margin-right:auto !important;
+}
+
+/* SP微調整 */
+@media (max-width:768px){
+  #top.hero-cover .hero-ui .lead{ max-width:92vw; }
+  #top.hero-cover .hero-ui .hero-cta{ width:min(520px,100%); }
+}
+
+
+/* === ボタン↔バッジ をさらに“3倍”詰める === */
+#top.hero-cover .hero-ui .hero-cta{
+  margin: 0 auto -12px !important;   /* 下をマイナスにして更に詰める（-8〜-16pxで調整可） */
+  position: relative; z-index: 2;     /* クリックしやすさ確保 */
+}
+#top.hero-cover .hero-ui .hero-badges{
+  margin-top: 0 !important;
+  transform: translateY(-24px);       /* 以前 -8px の“3倍”引き上げ */
+  position: relative; z-index: 1;     /* ボタンの下に置く */
+  will-change: transform;
+}
+
+/* === ヒーロー全体を“かなり”下へ（開始位置を下げる） === */
+#top.hero-cover .hero-ui{
+  padding-top: clamp(72px, 8vw, 140px) !important;  /* 数値↑でさらに下がる */
+}
+
+/* SPは少し控えめ */
+@media (max-width:768px){
+  #top.hero-cover .hero-ui{
+    padding-top: clamp(40px, 10vw, 84px) !important;
+  }
+  #top.hero-cover .hero-ui .hero-badges{
+    transform: translateY(-18px);     /* 詰めすぎ防止 */
+  }
+}
+
+
+/* ====== Button hover fix（全ボタン共通の白反転対策） ====== */
+/* ※既存の .lp-btn 系スタイルはそのまま活かし、hover だけを抑制します */
+
+.lp-btn, a.lp-btn, button.lp-btn{
+  filter: none !important;
+  mix-blend-mode: normal !important;
+}
+
+/* 既存の a:hover などが背景色を白に変える指定を打ち消し */
+a.lp-btn:hover,
+button.lp-btn:hover,
+a.lp-btn:focus,
+button.lp-btn:focus{
+  color: inherit !important;            /* 文字色は元のまま */
+  filter: none !important;
+  mix-blend-mode: normal !important;
+  box-shadow: 0 10px 24px rgba(0,0,0,.16);  /* 立体感だけ付ける（任意） */
+  transform: translateY(-1px);
+}
+
+/* ====== 主要バリアントは“元の色のまま”hoverでも固定 ====== */
+/* LINE（緑） */
+a.lp-btn.lp-btn-line:hover,
+a.lp-btn.lp-btn-line:focus,
+button.lp-btn.lp-btn-line:hover,
+button.lp-btn.lp-btn-line:focus{
+  background: linear-gradient(180deg,#1ED760 0%,#00B900 100%) !important;
+  color:#fff !important;
+  border-color: transparent !important;
+}
+
+/* （青ボタンをお使いなら）.lp-btn-primary も hoverで色固定 */
+a.lp-btn.lp-btn-primary:hover,
+a.lp-btn.lp-btn-primary:focus,
+button.lp-btn.lp-btn-primary:hover,
+button.lp-btn.lp-btn-primary:focus{
+  background: linear-gradient(180deg,#2aa6c9 0%,#1b7fc5 100%) !important;
+  color:#fff !important;
+  border-color: transparent !important;
+}
+
+/* アウトライン系がある場合は背景透明のままに */
+a.lp-btn.lp-btn-outline:hover,
+a.lp-btn.lp-btn-outline:focus,
+button.lp-btn.lp-btn-outline:hover,
+button.lp-btn.lp-btn-outline:focus{
+  background: color-mix(in srgb, currentColor 10%, transparent) !important;
+}
+
+
+/* ===== Paw：呼吸 + きらり（.paw-top に適用） ===== */
+
+/* 見えているときだけ“呼吸”アニメ */
+.paw-top.is-show{
+  animation: paw-breath 2.8s ease-in-out infinite;
+  transform-origin: 60% 60%;
+  will-change: transform;
+}
+
+@keyframes paw-breath{
+  0%,100% { transform: translateY(0) scale(1); }
+  50%     { transform: translateY(-2px) scale(1.04); }
+}
+
+/* きらり（白ハイライトのスジがすーっと横切る） */
+.paw-top{ position: relative; overflow: visible; }
+.paw-top::after{
+  content:"";
+  position:absolute; inset:0;
+  pointer-events:none;
+  /* 斜めの細いハイライト帯：中央だけ明るい */
+  background: linear-gradient(120deg,
+    rgba(255,255,255,0) 0%,
+    rgba(255,255,255,0) 44%,
+    rgba(255,255,255,.45) 50%,
+    rgba(255,255,255,0) 56%,
+    rgba(255,255,255,0) 100%);
+  transform: translateX(-130%);
+  opacity: 0;                       /* is-show まで停止 */
+}
+.paw-top.is-show::after{
+  opacity: 1;
+  animation: paw-shine 7s ease-in-out infinite 1.2s; /* 周期・遅延は好みで */
+  will-change: transform, opacity;
+}
+
+@keyframes paw-shine{
+  0%   { transform: translateX(-130%); }
+  8%   { transform: translateX(130%); } /* 8%だけで“スッ”と通過 */
+  100% { transform: translateX(130%); }
+}
+
+/* クリック時はぷにっと潰れる（お好み） */
+.paw-top:active{ transform: scale(.94) translateY(2px); transition: transform .18s ease; }
+
+/* 多動が苦手なユーザー配慮 */
+@media (prefers-reduced-motion: reduce){
+  .paw-top, .paw-top::after{ animation: none !important; }
+}
+
+.paw-top{
+  position: fixed; right: 20px;
+  bottom: calc(20px + var(--bottom-extra, 0px));
+  z-index: 1000;
+  opacity: 0; visibility: hidden; pointer-events: none;
+  transform: translateY(8px) scale(.96);
+  transition: opacity .25s ease, transform .25s ease, visibility 0s linear .25s;
+}
+.paw-top.is-show{
+  opacity: 1; visibility: visible; pointer-events: auto;
+  transform: translateY(0) scale(1);
+  transition: opacity .25s ease, transform .25s ease, visibility 0s;
+}
+
+
+/* === Paw base === */
+.paw-top{
+  position: fixed; right: 20px;
+  bottom: calc(20px + var(--bottom-extra, 0px));
+  z-index: 1000;
+  opacity: 0; visibility: hidden; pointer-events: none;
+  transform: translateY(8px) scale(.96);
+  transition: opacity .25s ease, transform .25s ease, visibility 0s linear .25s;
+}
+.paw-top.is-show{
+  opacity: 1; visibility: visible; pointer-events: auto;
+  transform: translateY(0) scale(1);
+  transition: opacity .25s ease, transform .25s ease, visibility 0s;
+}
+/* 画像/アイコンのレイアウト安定 */
+.paw-top img, .paw-top svg{ display:block; width:100%; height:auto; }
+
+/* === 呼吸アニメ（.paw-top 本体にも、中の <img> にも適用） === */
+@keyframes paw-breath{
+  0%,100% { transform: translateY(0) scale(1); }
+  50%     { transform: translateY(-2px) scale(1.04); }
+}
+.paw-top.is-show{ animation: paw-breath 2.8s ease-in-out infinite; transform-origin: 60% 60%; }
+.paw-top.is-show img, .paw-top.is-show svg{ animation: paw-breath 2.8s ease-in-out infinite; transform-origin: 60% 60%; }
+
+/* === きらり（子要素 .paw-shine を流す方式：<img>でもOK） === */
+.paw-top{ overflow: visible; }
+.paw-top .paw-shine{
+  position:absolute; inset:0; pointer-events:none;
+  background: linear-gradient(120deg,
+    rgba(255,255,255,0) 0%,
+    rgba(255,255,255,0) 44%,
+    rgba(255,255,255,.45) 50%,
+    rgba(255,255,255,0) 56%,
+    rgba(255,255,255,0) 100%);
+  transform: translateX(-130%); opacity: 0;
+}
+@keyframes paw-shine{
+  0%   { transform: translateX(-130%); }
+  8%   { transform: translateX(130%); }
+  100% { transform: translateX(130%); }
+}
+.paw-top.is-show .paw-shine{
+  opacity: 1; animation: paw-shine 7s ease-in-out infinite 1.2s;
+}
+
+/* クリックで“ぷにっ” */
+.paw-top:active{ transform: scale(.94) translateY(2px); transition: transform .18s ease; }
+
+@media (prefers-reduced-motion: reduce){
+  .paw-top, .paw-top *{ animation: none !important; }
+}
+
+/* --- paw：ベース（すでにあるなら重複OK） --- */
+.paw-top{ position:fixed; right:20px; bottom:calc(20px + var(--bottom-extra,0px));
+  z-index:1000; opacity:0; visibility:hidden; pointer-events:none;
+  transform:translateY(8px) scale(.96);
+  transition:opacity .25s ease, transform .25s ease, visibility 0s linear .25s;
+}
+.paw-top.is-show{ opacity:1; visibility:visible; pointer-events:auto;
+  transform:translateY(0) scale(1); transition:opacity .25s ease, transform .25s ease, visibility 0s;
+}
+.paw-top img,.paw-top svg{ display:block; width:100%; height:auto; }
+
+/* --- 呼吸（常時） --- */
+@keyframes paw-breath{
+  0%,100% { transform: translateY(0) scale(1); }
+  50%     { transform: translateY(-2px) scale(1.04); }
+}
+.paw-top.is-show{ animation: paw-breath 2.8s ease-in-out infinite; transform-origin:60% 60%; }
+
+/* --- ぷにっ（押した瞬間だけ、呼吸を一時停止して置き換える） --- */
+@keyframes paw-poke{
+  0%   { transform: translateY(0) scale(1); }
+  45%  { transform: translateY(2px) scale(.92); }
+  100% { transform: translateY(0) scale(1); }
+}
+.paw-top.is-show.is-poke{ animation: paw-poke .22s ease-out both; }
+
+/* --- 以前の“きらり”は使わない（存在しても非表示に） --- */
+.paw-top::after, .paw-top .paw-shine{ content:none !important; display:none !important; }
+
+/* 動きを減らす設定の端末でも“ぷにっ”は最小限に発火させたい場合は下を削除しないでOK。
+   呼吸も有効にしたいなら、この reduce ブロックは外してOKです。 */
+@media (prefers-reduced-motion: reduce){
+  .paw-top.is-show{ animation: none; }
+  .paw-top.is-show.is-poke{ animation: paw-poke .18s ease-out both; }
+}
+
+/* 強制：肉球は常に呼吸→押下時はぷにっ（reduce-motion でも動かす） */
+.paw-top.is-show{
+  animation: paw-breath 2.8s ease-in-out infinite !important;
+  will-change: transform;
+}
+.paw-top.is-show.is-poke{
+  animation: paw-poke .22s ease-out both !important;
+}
+
+/* ========== Hover Raise（リフト＋影） ========== */
+.fx-lift{
+  position: relative;
+  transition:
+    transform .18s ease,
+    box-shadow .22s ease,
+    border-color .22s ease;
+  will-change: transform, box-shadow;
+}
+
+/* PCのホバー時だけ浮かせる（SPは無駄に発火しない） */
+@media (hover:hover){
+  .fx-lift:hover{
+    transform: translateY(-4px);
+    box-shadow:
+      0 12px 24px rgba(2,6,23,.08),
+      0  4px  8px rgba(2,6,23,.06);
+    /* 枠線があるカードは少しだけアクセント寄りに */
+    border-color: color-mix(in srgb, var(--acc, #1b7fc5) 22%, var(--line, #e8edf3));
+  }
+}
+
+/* クリック時の“ギュッ”をほんのり（SPでも効く） */
+.fx-lift:active{ transform: translateY(-1px); }
+
+/* キーボード操作でも気持ちよく */
+.fx-lift:focus-visible{
+  outline: 3px solid color-mix(in srgb, var(--acc, #1b7fc5) 28%, transparent);
+  outline-offset: 2px;
+}
+
+/* 動きを減らす設定では静止 */
+@media (prefers-reduced-motion: reduce){
+  .fx-lift, .fx-lift *{ transition: none !important; }
+}
+
+/* === Fade-Up 12（共通入場アニメ） ===================== */
+[data-reveal]{
+  opacity:0;
+  transform: translateY(14px);
+  transition:
+    transform var(--reveal-dur,.42s) cubic-bezier(.22,.9,.2,1),
+    opacity   var(--reveal-dur,.42s) ease;
+  will-change: transform, opacity;
+}
+[data-reveal].is-in{ opacity:1; transform:none; }
+
+/* 方向を変えたい時だけ指定（基本は up） */
+[data-reveal="up"]{    transform: translateY(16px); }
+[data-reveal="down"]{  transform: translateY(-16px); }
+[data-reveal="left"]{  transform: translateX(-16px); }
+[data-reveal="right"]{ transform: translateX(16px); }
+[data-reveal="fade"]{  transform:none; }
+
+/* 行内スタッガー（親に .reveal-stagger） */
+.reveal-stagger > *{ transition-delay: calc(var(--i,0) * 70ms); }
+
+/* SPは移動量を控えめに */
+@media (max-width: 767px){
+  [data-reveal]{ transform: translateY(10px); }
+  [data-reveal="up"]{ transform: translateY(12px); }
+}
+
+/* 動きを減らす設定では静止 */
+@media (prefers-reduced-motion: reduce){
+  [data-reveal]{ opacity:1 !important; transform:none !important; transition:none !important; }
+}
+
+/* === Nayami Compact (SP中心で縦詰め) =================== */
+@media (max-width: 767px){
+  /* カード自体を薄く・間隔を詰める */
+  .nayami--compact .nayami-list{ gap: 14px; } /* grid/flexのgap用 */
+  .nayami--compact .nayami-card{
+    padding: 16px 16px 18px;
+  }
+
+  /* イラストを小さく（いずれかのマークアップに対応） */
+  .nayami--compact .nayami-card .nayami-illust{ margin-bottom: 10px; }
+  .nayami--compact .nayami-card .nayami-illust img{ width: 108px; height: auto; }
+  /* もし <article class="nayami-card"><img ...> 直入れの場合のフォールバック */
+  .nayami--compact .nayami-card > img:first-child{ width: 108px; height: auto; margin-bottom: 10px; }
+
+  /* 見出し・本文の余白を圧縮 */
+  .nayami--compact .nayami-card h3{
+    margin: 10px 0 6px;
+    line-height: 1.35;
+  }
+.nayami--compact .nayami-card p{
+  --lines: 2;
+  -webkit-line-clamp: var(--lines);
+  line-clamp: var(--lines);
+}
+
+}
+
+
+/* === 下線マーカー（やわらかい帯） ===================== */
+.mk-underline{
+  position: relative; z-index: 0; /* 背面に敷くため */
+  display: inline;
+  padding: 0 .06em;               /* 文字端の余白を少し確保 */
+}
+
+/* 実体は擬似要素で“帯”を敷く */
+.mk-underline::after{
+  content:""; position:absolute; z-index:-1;
+  left:-.18em; right:-.18em;     /* 文字より少し長く見せる */
+  bottom:.08em;                  /* ベースライン付近に配置 */
+  height:.58em;                  /* 帯の太さ（お好みで調整） */
+  background: var(--mk, rgba(255,110,110,.28));  /* フォールバック色 */
+  border-radius:.36em;           /* 端を丸く＝手書きっぽさ */
+  /* ほんのり滲ませたいなら↓解放（任意） */
+  /* filter: blur(.2px); */
+}
+
+/* “淡い赤っぽいパステル”のプリセット */
+.mk-sakura{ --mk: hsl(6 85% 78% / .34); }   /* 桜寄り（デフォルト） */
+.mk-apricot{ --mk: hsl(16 85% 78% / .34); } /* 杏色寄り（背景が黄味強い時） */
+
+/* ダークモードなどで強すぎる場合の微調整（任意） */
+@media (prefers-color-scheme: dark){
+  .mk-sakura{ --mk: hsl(6 85% 72% / .42); }
+}
+
+/* === Nayami: 猫アイコンだけ大きく ===================== */
+/* デフォ値：SPで少し大きめに（以前の108px→136pxへ） */
+.nayami--compact{ --illust: 136px; --illust-gap: 10px; }
+
+/* 画像が <figure class="nayami-illust"><img> … の場合 */
+.nayami--compact .nayami-card .nayami-illust{
+  display:flex; justify-content:center; align-items:center;
+  margin-bottom: var(--illust-gap);
+}
+.nayami--compact .nayami-card .nayami-illust img{
+  width: var(--illust); height: auto; aspect-ratio: 1 / 1; object-fit: contain;
+}
+
+/* 画像が直入れの場合のフォールバック */
+.nayami--compact .nayami-card > img:first-child{
+  width: var(--illust); height: auto; aspect-ratio: 1 / 1; object-fit: contain;
+  display:block; margin: 0 auto var(--illust-gap);
+}
+
+/* 画面が少し広い端末ではさらにワンサイズUP */
+@media (min-width: 480px){
+  .nayami--compact{ --illust: 148px; }
+}
+@media (min-width: 768px){
+  .nayami--compact{ --illust: 160px; }
+}
+
+/* カードの上下パディングは据え置き（必要なら微調整） */
+/* .nayami--compact .nayami-card{ padding-top:16px; padding-bottom:18px; } */
+
+/* === #eligibility：LINEボタンの余白をスリム化（SP中心） === */
+@media (max-width: 600px){
+  /* パネルの下側だけ少し詰める */
+  #eligibility .lp-cta-panel{ padding-bottom: 14px; }
+
+  /* ボタン内の余白を調整：文字まわりを小さめに、アイコン右のダミーを削除 */
+  #eligibility .lp-btn-line{
+    padding: 12px 16px;   /* 既存より縦横とも少しタイト */
+    font-size: 15px;
+    gap: 8px;             /* 文字とアイコンの間隔 */
+  }
+  #eligibility .lp-btn-line::before{ width: 16px; height: 16px; } /* アイコンも少し小さく */
+  #eligibility .lp-btn-line::after{ display: none; }              /* 右側のダミー余白カット */
+}
+
+/* ===== ウォッシュ（白の上に乗せる水彩オーバーレイ） ===== */
+.wash{
+  position: relative;
+  overflow: hidden;
+}
+.wash::after{
+  content:"";
+  position:absolute;
+  /* 枠線と角丸を邪魔しないよう少し内側に敷く */
+  inset: 6px;
+  border-radius: calc(var(--radius,16px) - 6px);
+  pointer-events:none;
+  z-index: 0; /* 背景の上・本文の下 */
+
+  /* やさしい赤みの水彩：左下＆右上ににじませる */
+  background:
+    radial-gradient(180px 120px at 12% 100%, hsl(6 85% 78% / .22), transparent 60%),
+    radial-gradient(160px 110px at 100% 0%,  hsl(16 82% 76% / .18), transparent 62%),
+    linear-gradient(180deg, transparent 0%, hsl(0 0% 100% / 0) 100%);
+}
+/* 本文は上に */
+.wash > *{
+  position: relative;
+  z-index: 1;
+}
+
+
+/* 下線マーカー共通 */
+.mk-underline{ position:relative; z-index:1; display:inline; padding:0 .06em; }
+.mk-underline::after{
+  content:""; position:absolute; z-index:-1;
+  left:-.18em; right:-.18em; bottom:.08em; height:.58em; /* 太さ・位置はお好みで */
+  background: var(--mk, rgba(30,144,255,.28)); border-radius:.36em;
+}
+/* 青トーン（やさしめ） */
+.mk-azure{ --mk: hsl(207 85% 62% / .32); }
+/* 太い/細いにしたい時は height を .50em〜.64em、位置は bottom を .06〜.12em で微調整 */
+
+
+/* === スマホで「約3人に1人」を1行表示に === */
+@media (max-width: 768px){
+  .lp-stat-num{
+    white-space: nowrap;   /* 自動改行を禁止 */
+    font-size: 28px;       /* 少し縮める（必要なら調整） */
+  }
+  .lp-stat-num span{
+    font-size: 1.2em;      /* 中の数字も相対的に調整 */
+  }
+}
